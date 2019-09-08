@@ -74,4 +74,8 @@ export class InfoPage implements OnInit {
  
     return await modal.present();
   }
+
+  openHistorico(child){
+    
+  }
 }

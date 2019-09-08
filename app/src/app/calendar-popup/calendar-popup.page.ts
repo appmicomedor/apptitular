@@ -3,6 +3,7 @@ import { ModalController, LoadingController, ToastController, AlertController } 
 import { CalendarComponentOptions, DayConfig } from "ion4-calendar";
 import { UtilService } from '../provider/util.service';
 import { AuthHttpService } from '../auth/auth-http.service';
+import { UserService } from '../provider/user.service';
 
 @Component({
   selector: 'app-calendar-popup',
@@ -14,7 +15,6 @@ export class CalendarPopupPage implements OnInit {
   @Input() child: any;
 
   loadingModal: any;
-
 
   date: Date;
   type: 'string';
@@ -56,7 +56,8 @@ export class CalendarPopupPage implements OnInit {
     private utilService: UtilService,
     private httpService : AuthHttpService, 
     public toastCtrl: ToastController,    
-    private alertCtrl: AlertController,    
+    private alertCtrl: AlertController,  
+    private userService: UserService,      
   ) { 
     this.date = new Date();
     this.dateYMD = this.utilService.formatYMD(this.date);
@@ -79,6 +80,8 @@ export class CalendarPopupPage implements OnInit {
   onChange($event) 
   {
     this.date = new Date(this.dateYMD);
+    this.date.setHours(14);
+    
     this.dateFmt = this.utilService.presentDate(this.date);
 
     this.calcStatus();
@@ -304,10 +307,16 @@ export class CalendarPopupPage implements OnInit {
     else if  (this.code==3)
       this.code = 1;
 
+    let user = this.userService.getUser();
+
     let param = {
       id:  this.data.id,
       dia: dayi,
-      value: this.code
+      value: this.code,
+      userId: user.db_id,
+      parentId: user.id,
+      childId: this.child.id,
+      date: this.date
     }
 
     this.data = null;

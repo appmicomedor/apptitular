@@ -60,6 +60,21 @@ class DbApi {
         this.dbConn.query(sql);
     }
 
+    setHistorial(userId, parentId, childId, date, value){        
+        let contador = 0;
+        let dt = this.toMysqlFormat(new Date());
+
+        let mysql_date = this.toMysqlFormat(new Date(date));
+        let sql = "\
+                INSERT INTO historial\
+                    (userId, parentId, childId, date, createdAt, value)\
+                VALUES\
+                    (" + userId + "," + parentId + "," + childId + ",'" + mysql_date + "','" + dt + "'," + value + ");"
+
+        //console.log('sql ' + sql);
+        this.dbConn.query(sql);
+    }
+
     twoDigits(d) {
         if(0 <= d && d < 10) return "0" + d.toString();
         if(-10 < d && d < 0) return "-0" + (-1*d).toString();

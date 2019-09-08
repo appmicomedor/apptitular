@@ -262,6 +262,7 @@ app.post('/set_day', function (req, res) {
 
         odoo.execute_kw('scat.student', 'write', [inParams], function (err, value) {
             if (err) { return res.send({ error: true, data: err, message: 'Error escritura en backend, contacte con soporte' }); }
+            dbapi.setHistorial(req.body.userId, req.body.parentId, req.body.childId, req.body.date, req.body.value);
             return res.send({ error: false, data: value, message: 'success' });
         });
 
