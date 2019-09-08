@@ -1,0 +1,31 @@
+<ion-header>
+  <!--ion-toolbar>
+    <ion-title>Sign In</ion-title>
+  </ion-toolbar>-->
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+        <div text-center>
+          <img src="assets/image/logo.png" style="width: 50%;">
+        </div>
+        <div class="infotext" padding>Introducir como usuario su DNI y como contraseña las 6 últimas cifras de su cuenta bancaria</div>
+        <div padding>
+          <ion-item>
+            <ion-input type="text" [(ngModel)]="username" placeholder="Usuario"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-input type="password" [(ngModel)]="password" placeholder="Contraseña"></ion-input>
+          </ion-item>
+        </div>
+  
+        <div padding>
+          <ion-button style="--background:#00584c;" size="large" (click)="signIn()"  expand="block">Entrar</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

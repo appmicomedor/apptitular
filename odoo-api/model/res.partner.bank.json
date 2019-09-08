@@ -1,0 +1,374 @@
+{
+    "error": false,
+    "data": {
+        "mandate_ids": {
+            "domain": [],
+            "change_default": false,
+            "help": "Banking mandates represent an authorization that the bank account owner gives to a company for a specific operation.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.banking.mandate",
+            "context": {},
+            "relation_field": "partner_bank_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true,
+            "string": "Direct Debit Mandates"
+        },
+        "bank_name": {
+            "change_default": false,
+            "string": "Name",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "related": [
+                "bank_id",
+                "name"
+            ],
+            "states": {},
+            "depends": [
+                "bank_id.name"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false
+        },
+        "create_date": {
+            "change_default": false,
+            "string": "Created on",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true
+        },
+        "bank_bic": {
+            "change_default": false,
+            "help": "Sometimes called BIC or Swift.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "related": [
+                "bank_id",
+                "bic"
+            ],
+            "states": {},
+            "depends": [
+                "bank_id.bic"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false,
+            "string": "Bank Identifier Code"
+        },
+        "sequence": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Sequence",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "integer",
+            "store": true
+        },
+        "__last_update": {
+            "change_default": false,
+            "string": "Last Modified on",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "create_date",
+                "write_date"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "datetime",
+            "store": false
+        },
+        "company_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Company",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.company",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "acc_type": {
+            "change_default": false,
+            "help": "Bank account type, inferred from account number",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "acc_number"
+            ],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true,
+            "string": "Bank Account Type"
+        },
+        "bank_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Bank",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.bank",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "currency_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Currency",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.currency",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "journal_id": {
+            "domain": [
+                [
+                    "type",
+                    "=",
+                    "bank"
+                ]
+            ],
+            "change_default": false,
+            "help": "The accounting journal corresponding to this bank account.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "journal_id.type"
+            ],
+            "relation": "account.journal",
+            "context": {},
+            "relation_field": "bank_account_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true,
+            "string": "Account Journal"
+        },
+        "write_date": {
+            "change_default": false,
+            "string": "Last Updated on",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true
+        },
+        "sanitized_acc_number": {
+            "change_default": false,
+            "string": "Sanitized Account Number",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "acc_number"
+            ],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "id": {
+            "change_default": false,
+            "string": "ID",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "integer",
+            "store": true
+        },
+        "display_name": {
+            "change_default": false,
+            "string": "Display Name",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "acc_number"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false
+        },
+        "write_uid": {
+            "domain": [],
+            "change_default": false,
+            "string": "Last Updated by",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "partner_id": {
+            "domain": [
+                "|",
+                [
+                    "is_company",
+                    "=",
+                    true
+                ],
+                [
+                    "parent_id",
+                    "=",
+                    false
+                ]
+            ],
+            "change_default": false,
+            "string": "Account Holder",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.partner",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "create_uid": {
+            "domain": [],
+            "change_default": false,
+            "string": "Created by",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "acc_country_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "If the country of the bank is Spain, it validates the bank code or IBAN, formatting it accordingly.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "related": [
+                "partner_id",
+                "country_id"
+            ],
+            "states": {},
+            "depends": [
+                "partner_id.country_id"
+            ],
+            "relation": "res.country",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Bank country"
+        },
+        "acc_number": {
+            "change_default": false,
+            "string": "Account Number",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        }
+    },
+    "message": "success"
+}

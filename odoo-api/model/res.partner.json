@@ -1,0 +1,5094 @@
+{
+    "error": false,
+    "data": {
+        "signup_valid": {
+            "change_default": false,
+            "string": "Signup Token is Valid",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false
+        },
+        "credit_policy_id": {
+            "domain": "[('account_ids', 'in', property_account_receivable_id)]",
+            "change_default": false,
+            "help": "The Credit Control Policy used for this partner. This setting can be forced on the invoice. If nothing is defined, it will use the company setting.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "credit.control.policy",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true,
+            "string": "Credit Control Policy"
+        },
+        "zip_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "City/Location",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.better.zip",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "invoice_warn": {
+            "selection": [
+                [
+                    "no-message",
+                    "No Message"
+                ],
+                [
+                    "warning",
+                    "Warning"
+                ],
+                [
+                    "block",
+                    "Blocking Message"
+                ]
+            ],
+            "change_default": false,
+            "help": "Selecting the \"Warning\" option will notify user with the message, Selecting \"Blocking Message\" will throw an exception with the message and block the flow. The Message has to be written in the next field.",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Invoice"
+        },
+        "purchase_order_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "# of Purchase Order",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "write_uid": {
+            "domain": [],
+            "change_default": false,
+            "string": "Last Updated by",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "contact_address": {
+            "change_default": false,
+            "string": "Complete Address",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "street",
+                "street2",
+                "zip",
+                "city",
+                "state_id",
+                "country_id",
+                "country_id.address_format",
+                "country_id.code",
+                "country_id.name",
+                "company_name",
+                "state_id.code",
+                "state_id.name"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false
+        },
+        "property_product_pricelist": {
+            "domain": [],
+            "change_default": false,
+            "help": "This pricelist will be used, instead of the default one, for sales to the current partner",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "country_id"
+            ],
+            "relation": "product.pricelist",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Sale Pricelist"
+        },
+        "signup_url": {
+            "change_default": false,
+            "string": "Signup URL",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false
+        },
+        "journal_item_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Journal Items",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "parent_name": {
+            "change_default": false,
+            "string": "Parent name",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "related": [
+                "parent_id",
+                "name"
+            ],
+            "states": {},
+            "depends": [
+                "parent_id.name"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false
+        },
+        "display_name": {
+            "change_default": false,
+            "string": "Display Name",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "comercial",
+                "is_company",
+                "name",
+                "parent_id.name",
+                "type",
+                "company_name"
+            ],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "opt_out": {
+            "change_default": false,
+            "help": "If opt-out is checked, this contact has refused to receive emails for mass mailing and marketing campaign. Filter 'Available for Mass Mailing' allows users to filter the partners when performing mass mailing.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true,
+            "string": "Opt-Out"
+        },
+        "title": {
+            "domain": [],
+            "change_default": false,
+            "string": "Title",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.partner.title",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "x_ise_estado": {
+            "selection": [
+                [
+                    "admitido",
+                    "Admitido"
+                ],
+                [
+                    "baja_ise",
+                    "Baja ise"
+                ],
+                [
+                    "solicitud",
+                    "Solicitud"
+                ],
+                [
+                    "usuario",
+                    "Usuario"
+                ],
+                [
+                    "indefinido",
+                    "Indefinido"
+                ],
+                [
+                    "titular",
+                    "Titular"
+                ]
+            ],
+            "change_default": false,
+            "string": "Estado",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true
+        },
+        "company_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Company",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.company",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "commercial_company_name": {
+            "change_default": false,
+            "string": "Company Name Entity",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "company_name",
+                "parent_id.is_company",
+                "commercial_partner_id.name"
+            ],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "parent_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Related Company",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.partner",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "credit_control_line_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Credit Control Lines",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "credit.control.line",
+            "context": {},
+            "relation_field": "invoice_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "customer_payment_mode_id": {
+            "domain": [
+                [
+                    "payment_type",
+                    "=",
+                    "inbound"
+                ]
+            ],
+            "change_default": false,
+            "help": "Select the default payment mode for this customer.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.payment.mode",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Customer Payment Mode"
+        },
+        "contracts_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Contracts",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "employee": {
+            "change_default": false,
+            "help": "Check this box if this contact is an Employee.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true,
+            "string": "Employee"
+        },
+        "supplier_invoice_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "# Vendor Bills",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "property_supplier_payment_term_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "This payment term will be used instead of the default one for purchase orders and vendor bills",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.payment.term",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Vendor Payment Terms"
+        },
+        "customer": {
+            "change_default": false,
+            "help": "Check this box if this contact is a customer.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true,
+            "string": "Is a Customer"
+        },
+        "fax": {
+            "change_default": false,
+            "string": "Fax",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "comercial": {
+            "change_default": false,
+            "string": "Trade name",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true,
+            "size": 128
+        },
+        "channel_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Channels",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "mail.channel",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2many",
+            "store": true
+        },
+        "child_ids": {
+            "domain": [
+                [
+                    "active",
+                    "=",
+                    true
+                ]
+            ],
+            "change_default": false,
+            "string": "Contacts",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "child_ids.active"
+            ],
+            "relation": "res.partner",
+            "context": {},
+            "relation_field": "parent_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "user_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Users",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "calendar_last_notif_ack": {
+            "change_default": false,
+            "string": "Last notification marked as read from base Calendar",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true
+        },
+        "x_ise_nie": {
+            "change_default": false,
+            "help": "Identificador del alumno",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true,
+            "string": "NIE"
+        },
+        "not_in_mod347": {
+            "change_default": false,
+            "help": "If you mark this field, this partner will not be included in any AEAT 347 model report, independently from the total amount of its operations.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true,
+            "string": "Not included in 347 report"
+        },
+        "image_medium": {
+            "change_default": false,
+            "help": "Medium-sized image of this contact. It is automatically resized as a 128x128px image, with aspect ratio preserved. Use this field in form views or some kanban views.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "attachment": true,
+            "company_dependent": false,
+            "sortable": true,
+            "type": "binary",
+            "store": true,
+            "string": "Medium-sized image"
+        },
+        "name": {
+            "change_default": false,
+            "string": "Name",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "debit_limit": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Payable Limit",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "store": true,
+            "company_dependent": false,
+            "sortable": true,
+            "type": "monetary",
+            "currency_field": "currency_id"
+        },
+        "signup_token": {
+            "change_default": false,
+            "string": "Signup token",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "contract_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Contracts",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.analytic.account",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "allergens_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Alérgenos",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "scat.allergens",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2many",
+            "store": true
+        },
+        "message_bounce": {
+            "group_operator": "sum",
+            "change_default": false,
+            "help": "Counter of the number of bounced emails for this contact",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "integer",
+            "store": true,
+            "string": "Bounce"
+        },
+        "message_follower_ids": {
+            "domain": [
+                [
+                    "res_model",
+                    "=",
+                    "res.partner"
+                ]
+            ],
+            "change_default": false,
+            "string": "Followers",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "mail.followers",
+            "context": {},
+            "relation_field": "res_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "comensal_type": {
+            "selection": [
+                [
+                    "A",
+                    "Alumno"
+                ],
+                [
+                    "P",
+                    "Profesor"
+                ],
+                [
+                    "D",
+                    "Director"
+                ]
+            ],
+            "change_default": false,
+            "string": "Tipo de comensal",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true
+        },
+        "notify_email": {
+            "selection": [
+                [
+                    "none",
+                    "Never"
+                ],
+                [
+                    "always",
+                    "All Messages"
+                ]
+            ],
+            "change_default": false,
+            "help": "Policy to receive emails for new messages pushed to your personal Inbox:\n- Never: no emails are sent\n- All Messages: for every notification you receive in your Inbox",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Email Messages and Notifications"
+        },
+        "message_needaction": {
+            "change_default": false,
+            "help": "If checked, new messages require your attention.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false,
+            "string": "Action Needed"
+        },
+        "has_unreconciled_entries": {
+            "change_default": false,
+            "help": "The partner has at least one unreconciled debit and credit since last time the invoices & payments matching was performed.",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false,
+            "string": "Has unreconciled entries"
+        },
+        "currency_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "Utility field to express amount currency",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.currency",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Currency"
+        },
+        "street": {
+            "change_default": false,
+            "string": "Street",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "payment_next_action_date": {
+            "change_default": false,
+            "help": "This is when the manual follow-up is needed.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "date",
+            "store": true,
+            "string": "Next Action Date"
+        },
+        "task_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Tasks",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "project.task",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "sii_enabled": {
+            "change_default": false,
+            "string": "Sii enabled",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false
+        },
+        "country_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Country",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.country",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "tz_offset": {
+            "change_default": false,
+            "string": "Timezone offset",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "tz"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false
+        },
+        "contract_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Contracts",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "debit": {
+            "group_operator": "sum",
+            "change_default": false,
+            "help": "Total amount you have to pay to this vendor.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "store": false,
+            "company_dependent": false,
+            "sortable": false,
+            "type": "monetary",
+            "currency_field": "currency_id",
+            "string": "Total Payable"
+        },
+        "supplier": {
+            "change_default": false,
+            "help": "Check this box if this contact is a vendor. If it's not checked, purchase people will not see it when encoding a purchase order.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true,
+            "string": "Is a Vendor"
+        },
+        "message_unread_counter": {
+            "group_operator": "sum",
+            "change_default": false,
+            "help": "Number of unread messages",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false,
+            "string": "Unread Messages Counter"
+        },
+        "ref": {
+            "change_default": false,
+            "string": "Internal Reference",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "email": {
+            "change_default": false,
+            "string": "Email",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "not_update_date": {
+            "change_default": false,
+            "string": "No actualizar fechas",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "picking_warn": {
+            "selection": [
+                [
+                    "no-message",
+                    "No Message"
+                ],
+                [
+                    "warning",
+                    "Warning"
+                ],
+                [
+                    "block",
+                    "Blocking Message"
+                ]
+            ],
+            "change_default": false,
+            "help": "Selecting the \"Warning\" option will notify user with the message, Selecting \"Blocking Message\" will throw an exception with the message and block the flow. The Message has to be written in the next field.",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Stock Picking"
+        },
+        "barcode": {
+            "change_default": false,
+            "help": "BarCode",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true,
+            "string": "Barcode"
+        },
+        "y_ise_v": {
+            "change_default": false,
+            "string": "Viernes",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "city": {
+            "change_default": false,
+            "string": "City",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "street2": {
+            "change_default": false,
+            "string": "Street2",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "y_ise_x": {
+            "change_default": false,
+            "string": "Miércoles",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "opportunity_ids": {
+            "domain": [
+                [
+                    "type",
+                    "=",
+                    "opportunity"
+                ]
+            ],
+            "change_default": false,
+            "string": "Opportunities",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "opportunity_ids.type"
+            ],
+            "relation": "crm.lead",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "active_school_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Colegio activo",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "school_ids",
+                "school_ids.end_date"
+            ],
+            "relation": "scat.school",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "active": {
+            "change_default": false,
+            "string": "Active",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "tz": {
+            "selection": [
+                [
+                    "Africa/Abidjan",
+                    "Africa/Abidjan"
+                ],
+                [
+                    "Africa/Accra",
+                    "Africa/Accra"
+                ],
+                [
+                    "Africa/Addis_Ababa",
+                    "Africa/Addis_Ababa"
+                ],
+                [
+                    "Africa/Algiers",
+                    "Africa/Algiers"
+                ],
+                [
+                    "Africa/Asmara",
+                    "Africa/Asmara"
+                ],
+                [
+                    "Africa/Asmera",
+                    "Africa/Asmera"
+                ],
+                [
+                    "Africa/Bamako",
+                    "Africa/Bamako"
+                ],
+                [
+                    "Africa/Bangui",
+                    "Africa/Bangui"
+                ],
+                [
+                    "Africa/Banjul",
+                    "Africa/Banjul"
+                ],
+                [
+                    "Africa/Bissau",
+                    "Africa/Bissau"
+                ],
+                [
+                    "Africa/Blantyre",
+                    "Africa/Blantyre"
+                ],
+                [
+                    "Africa/Brazzaville",
+                    "Africa/Brazzaville"
+                ],
+                [
+                    "Africa/Bujumbura",
+                    "Africa/Bujumbura"
+                ],
+                [
+                    "Africa/Cairo",
+                    "Africa/Cairo"
+                ],
+                [
+                    "Africa/Casablanca",
+                    "Africa/Casablanca"
+                ],
+                [
+                    "Africa/Ceuta",
+                    "Africa/Ceuta"
+                ],
+                [
+                    "Africa/Conakry",
+                    "Africa/Conakry"
+                ],
+                [
+                    "Africa/Dakar",
+                    "Africa/Dakar"
+                ],
+                [
+                    "Africa/Dar_es_Salaam",
+                    "Africa/Dar_es_Salaam"
+                ],
+                [
+                    "Africa/Djibouti",
+                    "Africa/Djibouti"
+                ],
+                [
+                    "Africa/Douala",
+                    "Africa/Douala"
+                ],
+                [
+                    "Africa/El_Aaiun",
+                    "Africa/El_Aaiun"
+                ],
+                [
+                    "Africa/Freetown",
+                    "Africa/Freetown"
+                ],
+                [
+                    "Africa/Gaborone",
+                    "Africa/Gaborone"
+                ],
+                [
+                    "Africa/Harare",
+                    "Africa/Harare"
+                ],
+                [
+                    "Africa/Johannesburg",
+                    "Africa/Johannesburg"
+                ],
+                [
+                    "Africa/Juba",
+                    "Africa/Juba"
+                ],
+                [
+                    "Africa/Kampala",
+                    "Africa/Kampala"
+                ],
+                [
+                    "Africa/Khartoum",
+                    "Africa/Khartoum"
+                ],
+                [
+                    "Africa/Kigali",
+                    "Africa/Kigali"
+                ],
+                [
+                    "Africa/Kinshasa",
+                    "Africa/Kinshasa"
+                ],
+                [
+                    "Africa/Lagos",
+                    "Africa/Lagos"
+                ],
+                [
+                    "Africa/Libreville",
+                    "Africa/Libreville"
+                ],
+                [
+                    "Africa/Lome",
+                    "Africa/Lome"
+                ],
+                [
+                    "Africa/Luanda",
+                    "Africa/Luanda"
+                ],
+                [
+                    "Africa/Lubumbashi",
+                    "Africa/Lubumbashi"
+                ],
+                [
+                    "Africa/Lusaka",
+                    "Africa/Lusaka"
+                ],
+                [
+                    "Africa/Malabo",
+                    "Africa/Malabo"
+                ],
+                [
+                    "Africa/Maputo",
+                    "Africa/Maputo"
+                ],
+                [
+                    "Africa/Maseru",
+                    "Africa/Maseru"
+                ],
+                [
+                    "Africa/Mbabane",
+                    "Africa/Mbabane"
+                ],
+                [
+                    "Africa/Mogadishu",
+                    "Africa/Mogadishu"
+                ],
+                [
+                    "Africa/Monrovia",
+                    "Africa/Monrovia"
+                ],
+                [
+                    "Africa/Nairobi",
+                    "Africa/Nairobi"
+                ],
+                [
+                    "Africa/Ndjamena",
+                    "Africa/Ndjamena"
+                ],
+                [
+                    "Africa/Niamey",
+                    "Africa/Niamey"
+                ],
+                [
+                    "Africa/Nouakchott",
+                    "Africa/Nouakchott"
+                ],
+                [
+                    "Africa/Ouagadougou",
+                    "Africa/Ouagadougou"
+                ],
+                [
+                    "Africa/Porto-Novo",
+                    "Africa/Porto-Novo"
+                ],
+                [
+                    "Africa/Sao_Tome",
+                    "Africa/Sao_Tome"
+                ],
+                [
+                    "Africa/Timbuktu",
+                    "Africa/Timbuktu"
+                ],
+                [
+                    "Africa/Tripoli",
+                    "Africa/Tripoli"
+                ],
+                [
+                    "Africa/Tunis",
+                    "Africa/Tunis"
+                ],
+                [
+                    "Africa/Windhoek",
+                    "Africa/Windhoek"
+                ],
+                [
+                    "America/Adak",
+                    "America/Adak"
+                ],
+                [
+                    "America/Anchorage",
+                    "America/Anchorage"
+                ],
+                [
+                    "America/Anguilla",
+                    "America/Anguilla"
+                ],
+                [
+                    "America/Antigua",
+                    "America/Antigua"
+                ],
+                [
+                    "America/Araguaina",
+                    "America/Araguaina"
+                ],
+                [
+                    "America/Argentina/Buenos_Aires",
+                    "America/Argentina/Buenos_Aires"
+                ],
+                [
+                    "America/Argentina/Catamarca",
+                    "America/Argentina/Catamarca"
+                ],
+                [
+                    "America/Argentina/ComodRivadavia",
+                    "America/Argentina/ComodRivadavia"
+                ],
+                [
+                    "America/Argentina/Cordoba",
+                    "America/Argentina/Cordoba"
+                ],
+                [
+                    "America/Argentina/Jujuy",
+                    "America/Argentina/Jujuy"
+                ],
+                [
+                    "America/Argentina/La_Rioja",
+                    "America/Argentina/La_Rioja"
+                ],
+                [
+                    "America/Argentina/Mendoza",
+                    "America/Argentina/Mendoza"
+                ],
+                [
+                    "America/Argentina/Rio_Gallegos",
+                    "America/Argentina/Rio_Gallegos"
+                ],
+                [
+                    "America/Argentina/Salta",
+                    "America/Argentina/Salta"
+                ],
+                [
+                    "America/Argentina/San_Juan",
+                    "America/Argentina/San_Juan"
+                ],
+                [
+                    "America/Argentina/San_Luis",
+                    "America/Argentina/San_Luis"
+                ],
+                [
+                    "America/Argentina/Tucuman",
+                    "America/Argentina/Tucuman"
+                ],
+                [
+                    "America/Argentina/Ushuaia",
+                    "America/Argentina/Ushuaia"
+                ],
+                [
+                    "America/Aruba",
+                    "America/Aruba"
+                ],
+                [
+                    "America/Asuncion",
+                    "America/Asuncion"
+                ],
+                [
+                    "America/Atikokan",
+                    "America/Atikokan"
+                ],
+                [
+                    "America/Atka",
+                    "America/Atka"
+                ],
+                [
+                    "America/Bahia",
+                    "America/Bahia"
+                ],
+                [
+                    "America/Bahia_Banderas",
+                    "America/Bahia_Banderas"
+                ],
+                [
+                    "America/Barbados",
+                    "America/Barbados"
+                ],
+                [
+                    "America/Belem",
+                    "America/Belem"
+                ],
+                [
+                    "America/Belize",
+                    "America/Belize"
+                ],
+                [
+                    "America/Blanc-Sablon",
+                    "America/Blanc-Sablon"
+                ],
+                [
+                    "America/Boa_Vista",
+                    "America/Boa_Vista"
+                ],
+                [
+                    "America/Bogota",
+                    "America/Bogota"
+                ],
+                [
+                    "America/Boise",
+                    "America/Boise"
+                ],
+                [
+                    "America/Buenos_Aires",
+                    "America/Buenos_Aires"
+                ],
+                [
+                    "America/Cambridge_Bay",
+                    "America/Cambridge_Bay"
+                ],
+                [
+                    "America/Campo_Grande",
+                    "America/Campo_Grande"
+                ],
+                [
+                    "America/Cancun",
+                    "America/Cancun"
+                ],
+                [
+                    "America/Caracas",
+                    "America/Caracas"
+                ],
+                [
+                    "America/Catamarca",
+                    "America/Catamarca"
+                ],
+                [
+                    "America/Cayenne",
+                    "America/Cayenne"
+                ],
+                [
+                    "America/Cayman",
+                    "America/Cayman"
+                ],
+                [
+                    "America/Chicago",
+                    "America/Chicago"
+                ],
+                [
+                    "America/Chihuahua",
+                    "America/Chihuahua"
+                ],
+                [
+                    "America/Coral_Harbour",
+                    "America/Coral_Harbour"
+                ],
+                [
+                    "America/Cordoba",
+                    "America/Cordoba"
+                ],
+                [
+                    "America/Costa_Rica",
+                    "America/Costa_Rica"
+                ],
+                [
+                    "America/Creston",
+                    "America/Creston"
+                ],
+                [
+                    "America/Cuiaba",
+                    "America/Cuiaba"
+                ],
+                [
+                    "America/Curacao",
+                    "America/Curacao"
+                ],
+                [
+                    "America/Danmarkshavn",
+                    "America/Danmarkshavn"
+                ],
+                [
+                    "America/Dawson",
+                    "America/Dawson"
+                ],
+                [
+                    "America/Dawson_Creek",
+                    "America/Dawson_Creek"
+                ],
+                [
+                    "America/Denver",
+                    "America/Denver"
+                ],
+                [
+                    "America/Detroit",
+                    "America/Detroit"
+                ],
+                [
+                    "America/Dominica",
+                    "America/Dominica"
+                ],
+                [
+                    "America/Edmonton",
+                    "America/Edmonton"
+                ],
+                [
+                    "America/Eirunepe",
+                    "America/Eirunepe"
+                ],
+                [
+                    "America/El_Salvador",
+                    "America/El_Salvador"
+                ],
+                [
+                    "America/Ensenada",
+                    "America/Ensenada"
+                ],
+                [
+                    "America/Fort_Wayne",
+                    "America/Fort_Wayne"
+                ],
+                [
+                    "America/Fortaleza",
+                    "America/Fortaleza"
+                ],
+                [
+                    "America/Glace_Bay",
+                    "America/Glace_Bay"
+                ],
+                [
+                    "America/Godthab",
+                    "America/Godthab"
+                ],
+                [
+                    "America/Goose_Bay",
+                    "America/Goose_Bay"
+                ],
+                [
+                    "America/Grand_Turk",
+                    "America/Grand_Turk"
+                ],
+                [
+                    "America/Grenada",
+                    "America/Grenada"
+                ],
+                [
+                    "America/Guadeloupe",
+                    "America/Guadeloupe"
+                ],
+                [
+                    "America/Guatemala",
+                    "America/Guatemala"
+                ],
+                [
+                    "America/Guayaquil",
+                    "America/Guayaquil"
+                ],
+                [
+                    "America/Guyana",
+                    "America/Guyana"
+                ],
+                [
+                    "America/Halifax",
+                    "America/Halifax"
+                ],
+                [
+                    "America/Havana",
+                    "America/Havana"
+                ],
+                [
+                    "America/Hermosillo",
+                    "America/Hermosillo"
+                ],
+                [
+                    "America/Indiana/Indianapolis",
+                    "America/Indiana/Indianapolis"
+                ],
+                [
+                    "America/Indiana/Knox",
+                    "America/Indiana/Knox"
+                ],
+                [
+                    "America/Indiana/Marengo",
+                    "America/Indiana/Marengo"
+                ],
+                [
+                    "America/Indiana/Petersburg",
+                    "America/Indiana/Petersburg"
+                ],
+                [
+                    "America/Indiana/Tell_City",
+                    "America/Indiana/Tell_City"
+                ],
+                [
+                    "America/Indiana/Vevay",
+                    "America/Indiana/Vevay"
+                ],
+                [
+                    "America/Indiana/Vincennes",
+                    "America/Indiana/Vincennes"
+                ],
+                [
+                    "America/Indiana/Winamac",
+                    "America/Indiana/Winamac"
+                ],
+                [
+                    "America/Indianapolis",
+                    "America/Indianapolis"
+                ],
+                [
+                    "America/Inuvik",
+                    "America/Inuvik"
+                ],
+                [
+                    "America/Iqaluit",
+                    "America/Iqaluit"
+                ],
+                [
+                    "America/Jamaica",
+                    "America/Jamaica"
+                ],
+                [
+                    "America/Jujuy",
+                    "America/Jujuy"
+                ],
+                [
+                    "America/Juneau",
+                    "America/Juneau"
+                ],
+                [
+                    "America/Kentucky/Louisville",
+                    "America/Kentucky/Louisville"
+                ],
+                [
+                    "America/Kentucky/Monticello",
+                    "America/Kentucky/Monticello"
+                ],
+                [
+                    "America/Knox_IN",
+                    "America/Knox_IN"
+                ],
+                [
+                    "America/Kralendijk",
+                    "America/Kralendijk"
+                ],
+                [
+                    "America/La_Paz",
+                    "America/La_Paz"
+                ],
+                [
+                    "America/Lima",
+                    "America/Lima"
+                ],
+                [
+                    "America/Los_Angeles",
+                    "America/Los_Angeles"
+                ],
+                [
+                    "America/Louisville",
+                    "America/Louisville"
+                ],
+                [
+                    "America/Lower_Princes",
+                    "America/Lower_Princes"
+                ],
+                [
+                    "America/Maceio",
+                    "America/Maceio"
+                ],
+                [
+                    "America/Managua",
+                    "America/Managua"
+                ],
+                [
+                    "America/Manaus",
+                    "America/Manaus"
+                ],
+                [
+                    "America/Marigot",
+                    "America/Marigot"
+                ],
+                [
+                    "America/Martinique",
+                    "America/Martinique"
+                ],
+                [
+                    "America/Matamoros",
+                    "America/Matamoros"
+                ],
+                [
+                    "America/Mazatlan",
+                    "America/Mazatlan"
+                ],
+                [
+                    "America/Mendoza",
+                    "America/Mendoza"
+                ],
+                [
+                    "America/Menominee",
+                    "America/Menominee"
+                ],
+                [
+                    "America/Merida",
+                    "America/Merida"
+                ],
+                [
+                    "America/Metlakatla",
+                    "America/Metlakatla"
+                ],
+                [
+                    "America/Mexico_City",
+                    "America/Mexico_City"
+                ],
+                [
+                    "America/Miquelon",
+                    "America/Miquelon"
+                ],
+                [
+                    "America/Moncton",
+                    "America/Moncton"
+                ],
+                [
+                    "America/Monterrey",
+                    "America/Monterrey"
+                ],
+                [
+                    "America/Montevideo",
+                    "America/Montevideo"
+                ],
+                [
+                    "America/Montreal",
+                    "America/Montreal"
+                ],
+                [
+                    "America/Montserrat",
+                    "America/Montserrat"
+                ],
+                [
+                    "America/Nassau",
+                    "America/Nassau"
+                ],
+                [
+                    "America/New_York",
+                    "America/New_York"
+                ],
+                [
+                    "America/Nipigon",
+                    "America/Nipigon"
+                ],
+                [
+                    "America/Nome",
+                    "America/Nome"
+                ],
+                [
+                    "America/Noronha",
+                    "America/Noronha"
+                ],
+                [
+                    "America/North_Dakota/Beulah",
+                    "America/North_Dakota/Beulah"
+                ],
+                [
+                    "America/North_Dakota/Center",
+                    "America/North_Dakota/Center"
+                ],
+                [
+                    "America/North_Dakota/New_Salem",
+                    "America/North_Dakota/New_Salem"
+                ],
+                [
+                    "America/Ojinaga",
+                    "America/Ojinaga"
+                ],
+                [
+                    "America/Panama",
+                    "America/Panama"
+                ],
+                [
+                    "America/Pangnirtung",
+                    "America/Pangnirtung"
+                ],
+                [
+                    "America/Paramaribo",
+                    "America/Paramaribo"
+                ],
+                [
+                    "America/Phoenix",
+                    "America/Phoenix"
+                ],
+                [
+                    "America/Port-au-Prince",
+                    "America/Port-au-Prince"
+                ],
+                [
+                    "America/Port_of_Spain",
+                    "America/Port_of_Spain"
+                ],
+                [
+                    "America/Porto_Acre",
+                    "America/Porto_Acre"
+                ],
+                [
+                    "America/Porto_Velho",
+                    "America/Porto_Velho"
+                ],
+                [
+                    "America/Puerto_Rico",
+                    "America/Puerto_Rico"
+                ],
+                [
+                    "America/Rainy_River",
+                    "America/Rainy_River"
+                ],
+                [
+                    "America/Rankin_Inlet",
+                    "America/Rankin_Inlet"
+                ],
+                [
+                    "America/Recife",
+                    "America/Recife"
+                ],
+                [
+                    "America/Regina",
+                    "America/Regina"
+                ],
+                [
+                    "America/Resolute",
+                    "America/Resolute"
+                ],
+                [
+                    "America/Rio_Branco",
+                    "America/Rio_Branco"
+                ],
+                [
+                    "America/Rosario",
+                    "America/Rosario"
+                ],
+                [
+                    "America/Santa_Isabel",
+                    "America/Santa_Isabel"
+                ],
+                [
+                    "America/Santarem",
+                    "America/Santarem"
+                ],
+                [
+                    "America/Santiago",
+                    "America/Santiago"
+                ],
+                [
+                    "America/Santo_Domingo",
+                    "America/Santo_Domingo"
+                ],
+                [
+                    "America/Sao_Paulo",
+                    "America/Sao_Paulo"
+                ],
+                [
+                    "America/Scoresbysund",
+                    "America/Scoresbysund"
+                ],
+                [
+                    "America/Shiprock",
+                    "America/Shiprock"
+                ],
+                [
+                    "America/Sitka",
+                    "America/Sitka"
+                ],
+                [
+                    "America/St_Barthelemy",
+                    "America/St_Barthelemy"
+                ],
+                [
+                    "America/St_Johns",
+                    "America/St_Johns"
+                ],
+                [
+                    "America/St_Kitts",
+                    "America/St_Kitts"
+                ],
+                [
+                    "America/St_Lucia",
+                    "America/St_Lucia"
+                ],
+                [
+                    "America/St_Thomas",
+                    "America/St_Thomas"
+                ],
+                [
+                    "America/St_Vincent",
+                    "America/St_Vincent"
+                ],
+                [
+                    "America/Swift_Current",
+                    "America/Swift_Current"
+                ],
+                [
+                    "America/Tegucigalpa",
+                    "America/Tegucigalpa"
+                ],
+                [
+                    "America/Thule",
+                    "America/Thule"
+                ],
+                [
+                    "America/Thunder_Bay",
+                    "America/Thunder_Bay"
+                ],
+                [
+                    "America/Tijuana",
+                    "America/Tijuana"
+                ],
+                [
+                    "America/Toronto",
+                    "America/Toronto"
+                ],
+                [
+                    "America/Tortola",
+                    "America/Tortola"
+                ],
+                [
+                    "America/Vancouver",
+                    "America/Vancouver"
+                ],
+                [
+                    "America/Virgin",
+                    "America/Virgin"
+                ],
+                [
+                    "America/Whitehorse",
+                    "America/Whitehorse"
+                ],
+                [
+                    "America/Winnipeg",
+                    "America/Winnipeg"
+                ],
+                [
+                    "America/Yakutat",
+                    "America/Yakutat"
+                ],
+                [
+                    "America/Yellowknife",
+                    "America/Yellowknife"
+                ],
+                [
+                    "Antarctica/Casey",
+                    "Antarctica/Casey"
+                ],
+                [
+                    "Antarctica/Davis",
+                    "Antarctica/Davis"
+                ],
+                [
+                    "Antarctica/DumontDUrville",
+                    "Antarctica/DumontDUrville"
+                ],
+                [
+                    "Antarctica/Macquarie",
+                    "Antarctica/Macquarie"
+                ],
+                [
+                    "Antarctica/Mawson",
+                    "Antarctica/Mawson"
+                ],
+                [
+                    "Antarctica/McMurdo",
+                    "Antarctica/McMurdo"
+                ],
+                [
+                    "Antarctica/Palmer",
+                    "Antarctica/Palmer"
+                ],
+                [
+                    "Antarctica/Rothera",
+                    "Antarctica/Rothera"
+                ],
+                [
+                    "Antarctica/South_Pole",
+                    "Antarctica/South_Pole"
+                ],
+                [
+                    "Antarctica/Syowa",
+                    "Antarctica/Syowa"
+                ],
+                [
+                    "Antarctica/Troll",
+                    "Antarctica/Troll"
+                ],
+                [
+                    "Antarctica/Vostok",
+                    "Antarctica/Vostok"
+                ],
+                [
+                    "Arctic/Longyearbyen",
+                    "Arctic/Longyearbyen"
+                ],
+                [
+                    "Asia/Aden",
+                    "Asia/Aden"
+                ],
+                [
+                    "Asia/Almaty",
+                    "Asia/Almaty"
+                ],
+                [
+                    "Asia/Amman",
+                    "Asia/Amman"
+                ],
+                [
+                    "Asia/Anadyr",
+                    "Asia/Anadyr"
+                ],
+                [
+                    "Asia/Aqtau",
+                    "Asia/Aqtau"
+                ],
+                [
+                    "Asia/Aqtobe",
+                    "Asia/Aqtobe"
+                ],
+                [
+                    "Asia/Ashgabat",
+                    "Asia/Ashgabat"
+                ],
+                [
+                    "Asia/Ashkhabad",
+                    "Asia/Ashkhabad"
+                ],
+                [
+                    "Asia/Baghdad",
+                    "Asia/Baghdad"
+                ],
+                [
+                    "Asia/Bahrain",
+                    "Asia/Bahrain"
+                ],
+                [
+                    "Asia/Baku",
+                    "Asia/Baku"
+                ],
+                [
+                    "Asia/Bangkok",
+                    "Asia/Bangkok"
+                ],
+                [
+                    "Asia/Beirut",
+                    "Asia/Beirut"
+                ],
+                [
+                    "Asia/Bishkek",
+                    "Asia/Bishkek"
+                ],
+                [
+                    "Asia/Brunei",
+                    "Asia/Brunei"
+                ],
+                [
+                    "Asia/Calcutta",
+                    "Asia/Calcutta"
+                ],
+                [
+                    "Asia/Chita",
+                    "Asia/Chita"
+                ],
+                [
+                    "Asia/Choibalsan",
+                    "Asia/Choibalsan"
+                ],
+                [
+                    "Asia/Chongqing",
+                    "Asia/Chongqing"
+                ],
+                [
+                    "Asia/Chungking",
+                    "Asia/Chungking"
+                ],
+                [
+                    "Asia/Colombo",
+                    "Asia/Colombo"
+                ],
+                [
+                    "Asia/Dacca",
+                    "Asia/Dacca"
+                ],
+                [
+                    "Asia/Damascus",
+                    "Asia/Damascus"
+                ],
+                [
+                    "Asia/Dhaka",
+                    "Asia/Dhaka"
+                ],
+                [
+                    "Asia/Dili",
+                    "Asia/Dili"
+                ],
+                [
+                    "Asia/Dubai",
+                    "Asia/Dubai"
+                ],
+                [
+                    "Asia/Dushanbe",
+                    "Asia/Dushanbe"
+                ],
+                [
+                    "Asia/Gaza",
+                    "Asia/Gaza"
+                ],
+                [
+                    "Asia/Harbin",
+                    "Asia/Harbin"
+                ],
+                [
+                    "Asia/Hebron",
+                    "Asia/Hebron"
+                ],
+                [
+                    "Asia/Ho_Chi_Minh",
+                    "Asia/Ho_Chi_Minh"
+                ],
+                [
+                    "Asia/Hong_Kong",
+                    "Asia/Hong_Kong"
+                ],
+                [
+                    "Asia/Hovd",
+                    "Asia/Hovd"
+                ],
+                [
+                    "Asia/Irkutsk",
+                    "Asia/Irkutsk"
+                ],
+                [
+                    "Asia/Istanbul",
+                    "Asia/Istanbul"
+                ],
+                [
+                    "Asia/Jakarta",
+                    "Asia/Jakarta"
+                ],
+                [
+                    "Asia/Jayapura",
+                    "Asia/Jayapura"
+                ],
+                [
+                    "Asia/Jerusalem",
+                    "Asia/Jerusalem"
+                ],
+                [
+                    "Asia/Kabul",
+                    "Asia/Kabul"
+                ],
+                [
+                    "Asia/Kamchatka",
+                    "Asia/Kamchatka"
+                ],
+                [
+                    "Asia/Karachi",
+                    "Asia/Karachi"
+                ],
+                [
+                    "Asia/Kashgar",
+                    "Asia/Kashgar"
+                ],
+                [
+                    "Asia/Kathmandu",
+                    "Asia/Kathmandu"
+                ],
+                [
+                    "Asia/Katmandu",
+                    "Asia/Katmandu"
+                ],
+                [
+                    "Asia/Khandyga",
+                    "Asia/Khandyga"
+                ],
+                [
+                    "Asia/Kolkata",
+                    "Asia/Kolkata"
+                ],
+                [
+                    "Asia/Krasnoyarsk",
+                    "Asia/Krasnoyarsk"
+                ],
+                [
+                    "Asia/Kuala_Lumpur",
+                    "Asia/Kuala_Lumpur"
+                ],
+                [
+                    "Asia/Kuching",
+                    "Asia/Kuching"
+                ],
+                [
+                    "Asia/Kuwait",
+                    "Asia/Kuwait"
+                ],
+                [
+                    "Asia/Macao",
+                    "Asia/Macao"
+                ],
+                [
+                    "Asia/Macau",
+                    "Asia/Macau"
+                ],
+                [
+                    "Asia/Magadan",
+                    "Asia/Magadan"
+                ],
+                [
+                    "Asia/Makassar",
+                    "Asia/Makassar"
+                ],
+                [
+                    "Asia/Manila",
+                    "Asia/Manila"
+                ],
+                [
+                    "Asia/Muscat",
+                    "Asia/Muscat"
+                ],
+                [
+                    "Asia/Nicosia",
+                    "Asia/Nicosia"
+                ],
+                [
+                    "Asia/Novokuznetsk",
+                    "Asia/Novokuznetsk"
+                ],
+                [
+                    "Asia/Novosibirsk",
+                    "Asia/Novosibirsk"
+                ],
+                [
+                    "Asia/Omsk",
+                    "Asia/Omsk"
+                ],
+                [
+                    "Asia/Oral",
+                    "Asia/Oral"
+                ],
+                [
+                    "Asia/Phnom_Penh",
+                    "Asia/Phnom_Penh"
+                ],
+                [
+                    "Asia/Pontianak",
+                    "Asia/Pontianak"
+                ],
+                [
+                    "Asia/Pyongyang",
+                    "Asia/Pyongyang"
+                ],
+                [
+                    "Asia/Qatar",
+                    "Asia/Qatar"
+                ],
+                [
+                    "Asia/Qyzylorda",
+                    "Asia/Qyzylorda"
+                ],
+                [
+                    "Asia/Rangoon",
+                    "Asia/Rangoon"
+                ],
+                [
+                    "Asia/Riyadh",
+                    "Asia/Riyadh"
+                ],
+                [
+                    "Asia/Saigon",
+                    "Asia/Saigon"
+                ],
+                [
+                    "Asia/Sakhalin",
+                    "Asia/Sakhalin"
+                ],
+                [
+                    "Asia/Samarkand",
+                    "Asia/Samarkand"
+                ],
+                [
+                    "Asia/Seoul",
+                    "Asia/Seoul"
+                ],
+                [
+                    "Asia/Shanghai",
+                    "Asia/Shanghai"
+                ],
+                [
+                    "Asia/Singapore",
+                    "Asia/Singapore"
+                ],
+                [
+                    "Asia/Srednekolymsk",
+                    "Asia/Srednekolymsk"
+                ],
+                [
+                    "Asia/Taipei",
+                    "Asia/Taipei"
+                ],
+                [
+                    "Asia/Tashkent",
+                    "Asia/Tashkent"
+                ],
+                [
+                    "Asia/Tbilisi",
+                    "Asia/Tbilisi"
+                ],
+                [
+                    "Asia/Tehran",
+                    "Asia/Tehran"
+                ],
+                [
+                    "Asia/Tel_Aviv",
+                    "Asia/Tel_Aviv"
+                ],
+                [
+                    "Asia/Thimbu",
+                    "Asia/Thimbu"
+                ],
+                [
+                    "Asia/Thimphu",
+                    "Asia/Thimphu"
+                ],
+                [
+                    "Asia/Tokyo",
+                    "Asia/Tokyo"
+                ],
+                [
+                    "Asia/Ujung_Pandang",
+                    "Asia/Ujung_Pandang"
+                ],
+                [
+                    "Asia/Ulaanbaatar",
+                    "Asia/Ulaanbaatar"
+                ],
+                [
+                    "Asia/Ulan_Bator",
+                    "Asia/Ulan_Bator"
+                ],
+                [
+                    "Asia/Urumqi",
+                    "Asia/Urumqi"
+                ],
+                [
+                    "Asia/Ust-Nera",
+                    "Asia/Ust-Nera"
+                ],
+                [
+                    "Asia/Vientiane",
+                    "Asia/Vientiane"
+                ],
+                [
+                    "Asia/Vladivostok",
+                    "Asia/Vladivostok"
+                ],
+                [
+                    "Asia/Yakutsk",
+                    "Asia/Yakutsk"
+                ],
+                [
+                    "Asia/Yekaterinburg",
+                    "Asia/Yekaterinburg"
+                ],
+                [
+                    "Asia/Yerevan",
+                    "Asia/Yerevan"
+                ],
+                [
+                    "Atlantic/Azores",
+                    "Atlantic/Azores"
+                ],
+                [
+                    "Atlantic/Bermuda",
+                    "Atlantic/Bermuda"
+                ],
+                [
+                    "Atlantic/Canary",
+                    "Atlantic/Canary"
+                ],
+                [
+                    "Atlantic/Cape_Verde",
+                    "Atlantic/Cape_Verde"
+                ],
+                [
+                    "Atlantic/Faeroe",
+                    "Atlantic/Faeroe"
+                ],
+                [
+                    "Atlantic/Faroe",
+                    "Atlantic/Faroe"
+                ],
+                [
+                    "Atlantic/Jan_Mayen",
+                    "Atlantic/Jan_Mayen"
+                ],
+                [
+                    "Atlantic/Madeira",
+                    "Atlantic/Madeira"
+                ],
+                [
+                    "Atlantic/Reykjavik",
+                    "Atlantic/Reykjavik"
+                ],
+                [
+                    "Atlantic/South_Georgia",
+                    "Atlantic/South_Georgia"
+                ],
+                [
+                    "Atlantic/St_Helena",
+                    "Atlantic/St_Helena"
+                ],
+                [
+                    "Atlantic/Stanley",
+                    "Atlantic/Stanley"
+                ],
+                [
+                    "Australia/ACT",
+                    "Australia/ACT"
+                ],
+                [
+                    "Australia/Adelaide",
+                    "Australia/Adelaide"
+                ],
+                [
+                    "Australia/Brisbane",
+                    "Australia/Brisbane"
+                ],
+                [
+                    "Australia/Broken_Hill",
+                    "Australia/Broken_Hill"
+                ],
+                [
+                    "Australia/Canberra",
+                    "Australia/Canberra"
+                ],
+                [
+                    "Australia/Currie",
+                    "Australia/Currie"
+                ],
+                [
+                    "Australia/Darwin",
+                    "Australia/Darwin"
+                ],
+                [
+                    "Australia/Eucla",
+                    "Australia/Eucla"
+                ],
+                [
+                    "Australia/Hobart",
+                    "Australia/Hobart"
+                ],
+                [
+                    "Australia/LHI",
+                    "Australia/LHI"
+                ],
+                [
+                    "Australia/Lindeman",
+                    "Australia/Lindeman"
+                ],
+                [
+                    "Australia/Lord_Howe",
+                    "Australia/Lord_Howe"
+                ],
+                [
+                    "Australia/Melbourne",
+                    "Australia/Melbourne"
+                ],
+                [
+                    "Australia/NSW",
+                    "Australia/NSW"
+                ],
+                [
+                    "Australia/North",
+                    "Australia/North"
+                ],
+                [
+                    "Australia/Perth",
+                    "Australia/Perth"
+                ],
+                [
+                    "Australia/Queensland",
+                    "Australia/Queensland"
+                ],
+                [
+                    "Australia/South",
+                    "Australia/South"
+                ],
+                [
+                    "Australia/Sydney",
+                    "Australia/Sydney"
+                ],
+                [
+                    "Australia/Tasmania",
+                    "Australia/Tasmania"
+                ],
+                [
+                    "Australia/Victoria",
+                    "Australia/Victoria"
+                ],
+                [
+                    "Australia/West",
+                    "Australia/West"
+                ],
+                [
+                    "Australia/Yancowinna",
+                    "Australia/Yancowinna"
+                ],
+                [
+                    "Brazil/Acre",
+                    "Brazil/Acre"
+                ],
+                [
+                    "Brazil/DeNoronha",
+                    "Brazil/DeNoronha"
+                ],
+                [
+                    "Brazil/East",
+                    "Brazil/East"
+                ],
+                [
+                    "Brazil/West",
+                    "Brazil/West"
+                ],
+                [
+                    "CET",
+                    "CET"
+                ],
+                [
+                    "CST6CDT",
+                    "CST6CDT"
+                ],
+                [
+                    "Canada/Atlantic",
+                    "Canada/Atlantic"
+                ],
+                [
+                    "Canada/Central",
+                    "Canada/Central"
+                ],
+                [
+                    "Canada/East-Saskatchewan",
+                    "Canada/East-Saskatchewan"
+                ],
+                [
+                    "Canada/Eastern",
+                    "Canada/Eastern"
+                ],
+                [
+                    "Canada/Mountain",
+                    "Canada/Mountain"
+                ],
+                [
+                    "Canada/Newfoundland",
+                    "Canada/Newfoundland"
+                ],
+                [
+                    "Canada/Pacific",
+                    "Canada/Pacific"
+                ],
+                [
+                    "Canada/Saskatchewan",
+                    "Canada/Saskatchewan"
+                ],
+                [
+                    "Canada/Yukon",
+                    "Canada/Yukon"
+                ],
+                [
+                    "Chile/Continental",
+                    "Chile/Continental"
+                ],
+                [
+                    "Chile/EasterIsland",
+                    "Chile/EasterIsland"
+                ],
+                [
+                    "Cuba",
+                    "Cuba"
+                ],
+                [
+                    "EET",
+                    "EET"
+                ],
+                [
+                    "EST",
+                    "EST"
+                ],
+                [
+                    "EST5EDT",
+                    "EST5EDT"
+                ],
+                [
+                    "Egypt",
+                    "Egypt"
+                ],
+                [
+                    "Eire",
+                    "Eire"
+                ],
+                [
+                    "Europe/Amsterdam",
+                    "Europe/Amsterdam"
+                ],
+                [
+                    "Europe/Andorra",
+                    "Europe/Andorra"
+                ],
+                [
+                    "Europe/Athens",
+                    "Europe/Athens"
+                ],
+                [
+                    "Europe/Belfast",
+                    "Europe/Belfast"
+                ],
+                [
+                    "Europe/Belgrade",
+                    "Europe/Belgrade"
+                ],
+                [
+                    "Europe/Berlin",
+                    "Europe/Berlin"
+                ],
+                [
+                    "Europe/Bratislava",
+                    "Europe/Bratislava"
+                ],
+                [
+                    "Europe/Brussels",
+                    "Europe/Brussels"
+                ],
+                [
+                    "Europe/Bucharest",
+                    "Europe/Bucharest"
+                ],
+                [
+                    "Europe/Budapest",
+                    "Europe/Budapest"
+                ],
+                [
+                    "Europe/Busingen",
+                    "Europe/Busingen"
+                ],
+                [
+                    "Europe/Chisinau",
+                    "Europe/Chisinau"
+                ],
+                [
+                    "Europe/Copenhagen",
+                    "Europe/Copenhagen"
+                ],
+                [
+                    "Europe/Dublin",
+                    "Europe/Dublin"
+                ],
+                [
+                    "Europe/Gibraltar",
+                    "Europe/Gibraltar"
+                ],
+                [
+                    "Europe/Guernsey",
+                    "Europe/Guernsey"
+                ],
+                [
+                    "Europe/Helsinki",
+                    "Europe/Helsinki"
+                ],
+                [
+                    "Europe/Isle_of_Man",
+                    "Europe/Isle_of_Man"
+                ],
+                [
+                    "Europe/Istanbul",
+                    "Europe/Istanbul"
+                ],
+                [
+                    "Europe/Jersey",
+                    "Europe/Jersey"
+                ],
+                [
+                    "Europe/Kaliningrad",
+                    "Europe/Kaliningrad"
+                ],
+                [
+                    "Europe/Kiev",
+                    "Europe/Kiev"
+                ],
+                [
+                    "Europe/Lisbon",
+                    "Europe/Lisbon"
+                ],
+                [
+                    "Europe/Ljubljana",
+                    "Europe/Ljubljana"
+                ],
+                [
+                    "Europe/London",
+                    "Europe/London"
+                ],
+                [
+                    "Europe/Luxembourg",
+                    "Europe/Luxembourg"
+                ],
+                [
+                    "Europe/Madrid",
+                    "Europe/Madrid"
+                ],
+                [
+                    "Europe/Malta",
+                    "Europe/Malta"
+                ],
+                [
+                    "Europe/Mariehamn",
+                    "Europe/Mariehamn"
+                ],
+                [
+                    "Europe/Minsk",
+                    "Europe/Minsk"
+                ],
+                [
+                    "Europe/Monaco",
+                    "Europe/Monaco"
+                ],
+                [
+                    "Europe/Moscow",
+                    "Europe/Moscow"
+                ],
+                [
+                    "Europe/Nicosia",
+                    "Europe/Nicosia"
+                ],
+                [
+                    "Europe/Oslo",
+                    "Europe/Oslo"
+                ],
+                [
+                    "Europe/Paris",
+                    "Europe/Paris"
+                ],
+                [
+                    "Europe/Podgorica",
+                    "Europe/Podgorica"
+                ],
+                [
+                    "Europe/Prague",
+                    "Europe/Prague"
+                ],
+                [
+                    "Europe/Riga",
+                    "Europe/Riga"
+                ],
+                [
+                    "Europe/Rome",
+                    "Europe/Rome"
+                ],
+                [
+                    "Europe/Samara",
+                    "Europe/Samara"
+                ],
+                [
+                    "Europe/San_Marino",
+                    "Europe/San_Marino"
+                ],
+                [
+                    "Europe/Sarajevo",
+                    "Europe/Sarajevo"
+                ],
+                [
+                    "Europe/Simferopol",
+                    "Europe/Simferopol"
+                ],
+                [
+                    "Europe/Skopje",
+                    "Europe/Skopje"
+                ],
+                [
+                    "Europe/Sofia",
+                    "Europe/Sofia"
+                ],
+                [
+                    "Europe/Stockholm",
+                    "Europe/Stockholm"
+                ],
+                [
+                    "Europe/Tallinn",
+                    "Europe/Tallinn"
+                ],
+                [
+                    "Europe/Tirane",
+                    "Europe/Tirane"
+                ],
+                [
+                    "Europe/Tiraspol",
+                    "Europe/Tiraspol"
+                ],
+                [
+                    "Europe/Uzhgorod",
+                    "Europe/Uzhgorod"
+                ],
+                [
+                    "Europe/Vaduz",
+                    "Europe/Vaduz"
+                ],
+                [
+                    "Europe/Vatican",
+                    "Europe/Vatican"
+                ],
+                [
+                    "Europe/Vienna",
+                    "Europe/Vienna"
+                ],
+                [
+                    "Europe/Vilnius",
+                    "Europe/Vilnius"
+                ],
+                [
+                    "Europe/Volgograd",
+                    "Europe/Volgograd"
+                ],
+                [
+                    "Europe/Warsaw",
+                    "Europe/Warsaw"
+                ],
+                [
+                    "Europe/Zagreb",
+                    "Europe/Zagreb"
+                ],
+                [
+                    "Europe/Zaporozhye",
+                    "Europe/Zaporozhye"
+                ],
+                [
+                    "Europe/Zurich",
+                    "Europe/Zurich"
+                ],
+                [
+                    "GB",
+                    "GB"
+                ],
+                [
+                    "GB-Eire",
+                    "GB-Eire"
+                ],
+                [
+                    "GMT",
+                    "GMT"
+                ],
+                [
+                    "GMT+0",
+                    "GMT+0"
+                ],
+                [
+                    "GMT-0",
+                    "GMT-0"
+                ],
+                [
+                    "GMT0",
+                    "GMT0"
+                ],
+                [
+                    "Greenwich",
+                    "Greenwich"
+                ],
+                [
+                    "HST",
+                    "HST"
+                ],
+                [
+                    "Hongkong",
+                    "Hongkong"
+                ],
+                [
+                    "Iceland",
+                    "Iceland"
+                ],
+                [
+                    "Indian/Antananarivo",
+                    "Indian/Antananarivo"
+                ],
+                [
+                    "Indian/Chagos",
+                    "Indian/Chagos"
+                ],
+                [
+                    "Indian/Christmas",
+                    "Indian/Christmas"
+                ],
+                [
+                    "Indian/Cocos",
+                    "Indian/Cocos"
+                ],
+                [
+                    "Indian/Comoro",
+                    "Indian/Comoro"
+                ],
+                [
+                    "Indian/Kerguelen",
+                    "Indian/Kerguelen"
+                ],
+                [
+                    "Indian/Mahe",
+                    "Indian/Mahe"
+                ],
+                [
+                    "Indian/Maldives",
+                    "Indian/Maldives"
+                ],
+                [
+                    "Indian/Mauritius",
+                    "Indian/Mauritius"
+                ],
+                [
+                    "Indian/Mayotte",
+                    "Indian/Mayotte"
+                ],
+                [
+                    "Indian/Reunion",
+                    "Indian/Reunion"
+                ],
+                [
+                    "Iran",
+                    "Iran"
+                ],
+                [
+                    "Israel",
+                    "Israel"
+                ],
+                [
+                    "Jamaica",
+                    "Jamaica"
+                ],
+                [
+                    "Japan",
+                    "Japan"
+                ],
+                [
+                    "Kwajalein",
+                    "Kwajalein"
+                ],
+                [
+                    "Libya",
+                    "Libya"
+                ],
+                [
+                    "MET",
+                    "MET"
+                ],
+                [
+                    "MST",
+                    "MST"
+                ],
+                [
+                    "MST7MDT",
+                    "MST7MDT"
+                ],
+                [
+                    "Mexico/BajaNorte",
+                    "Mexico/BajaNorte"
+                ],
+                [
+                    "Mexico/BajaSur",
+                    "Mexico/BajaSur"
+                ],
+                [
+                    "Mexico/General",
+                    "Mexico/General"
+                ],
+                [
+                    "NZ",
+                    "NZ"
+                ],
+                [
+                    "NZ-CHAT",
+                    "NZ-CHAT"
+                ],
+                [
+                    "Navajo",
+                    "Navajo"
+                ],
+                [
+                    "PRC",
+                    "PRC"
+                ],
+                [
+                    "PST8PDT",
+                    "PST8PDT"
+                ],
+                [
+                    "Pacific/Apia",
+                    "Pacific/Apia"
+                ],
+                [
+                    "Pacific/Auckland",
+                    "Pacific/Auckland"
+                ],
+                [
+                    "Pacific/Bougainville",
+                    "Pacific/Bougainville"
+                ],
+                [
+                    "Pacific/Chatham",
+                    "Pacific/Chatham"
+                ],
+                [
+                    "Pacific/Chuuk",
+                    "Pacific/Chuuk"
+                ],
+                [
+                    "Pacific/Easter",
+                    "Pacific/Easter"
+                ],
+                [
+                    "Pacific/Efate",
+                    "Pacific/Efate"
+                ],
+                [
+                    "Pacific/Enderbury",
+                    "Pacific/Enderbury"
+                ],
+                [
+                    "Pacific/Fakaofo",
+                    "Pacific/Fakaofo"
+                ],
+                [
+                    "Pacific/Fiji",
+                    "Pacific/Fiji"
+                ],
+                [
+                    "Pacific/Funafuti",
+                    "Pacific/Funafuti"
+                ],
+                [
+                    "Pacific/Galapagos",
+                    "Pacific/Galapagos"
+                ],
+                [
+                    "Pacific/Gambier",
+                    "Pacific/Gambier"
+                ],
+                [
+                    "Pacific/Guadalcanal",
+                    "Pacific/Guadalcanal"
+                ],
+                [
+                    "Pacific/Guam",
+                    "Pacific/Guam"
+                ],
+                [
+                    "Pacific/Honolulu",
+                    "Pacific/Honolulu"
+                ],
+                [
+                    "Pacific/Johnston",
+                    "Pacific/Johnston"
+                ],
+                [
+                    "Pacific/Kiritimati",
+                    "Pacific/Kiritimati"
+                ],
+                [
+                    "Pacific/Kosrae",
+                    "Pacific/Kosrae"
+                ],
+                [
+                    "Pacific/Kwajalein",
+                    "Pacific/Kwajalein"
+                ],
+                [
+                    "Pacific/Majuro",
+                    "Pacific/Majuro"
+                ],
+                [
+                    "Pacific/Marquesas",
+                    "Pacific/Marquesas"
+                ],
+                [
+                    "Pacific/Midway",
+                    "Pacific/Midway"
+                ],
+                [
+                    "Pacific/Nauru",
+                    "Pacific/Nauru"
+                ],
+                [
+                    "Pacific/Niue",
+                    "Pacific/Niue"
+                ],
+                [
+                    "Pacific/Norfolk",
+                    "Pacific/Norfolk"
+                ],
+                [
+                    "Pacific/Noumea",
+                    "Pacific/Noumea"
+                ],
+                [
+                    "Pacific/Pago_Pago",
+                    "Pacific/Pago_Pago"
+                ],
+                [
+                    "Pacific/Palau",
+                    "Pacific/Palau"
+                ],
+                [
+                    "Pacific/Pitcairn",
+                    "Pacific/Pitcairn"
+                ],
+                [
+                    "Pacific/Pohnpei",
+                    "Pacific/Pohnpei"
+                ],
+                [
+                    "Pacific/Ponape",
+                    "Pacific/Ponape"
+                ],
+                [
+                    "Pacific/Port_Moresby",
+                    "Pacific/Port_Moresby"
+                ],
+                [
+                    "Pacific/Rarotonga",
+                    "Pacific/Rarotonga"
+                ],
+                [
+                    "Pacific/Saipan",
+                    "Pacific/Saipan"
+                ],
+                [
+                    "Pacific/Samoa",
+                    "Pacific/Samoa"
+                ],
+                [
+                    "Pacific/Tahiti",
+                    "Pacific/Tahiti"
+                ],
+                [
+                    "Pacific/Tarawa",
+                    "Pacific/Tarawa"
+                ],
+                [
+                    "Pacific/Tongatapu",
+                    "Pacific/Tongatapu"
+                ],
+                [
+                    "Pacific/Truk",
+                    "Pacific/Truk"
+                ],
+                [
+                    "Pacific/Wake",
+                    "Pacific/Wake"
+                ],
+                [
+                    "Pacific/Wallis",
+                    "Pacific/Wallis"
+                ],
+                [
+                    "Pacific/Yap",
+                    "Pacific/Yap"
+                ],
+                [
+                    "Poland",
+                    "Poland"
+                ],
+                [
+                    "Portugal",
+                    "Portugal"
+                ],
+                [
+                    "ROC",
+                    "ROC"
+                ],
+                [
+                    "ROK",
+                    "ROK"
+                ],
+                [
+                    "Singapore",
+                    "Singapore"
+                ],
+                [
+                    "Turkey",
+                    "Turkey"
+                ],
+                [
+                    "UCT",
+                    "UCT"
+                ],
+                [
+                    "US/Alaska",
+                    "US/Alaska"
+                ],
+                [
+                    "US/Aleutian",
+                    "US/Aleutian"
+                ],
+                [
+                    "US/Arizona",
+                    "US/Arizona"
+                ],
+                [
+                    "US/Central",
+                    "US/Central"
+                ],
+                [
+                    "US/East-Indiana",
+                    "US/East-Indiana"
+                ],
+                [
+                    "US/Eastern",
+                    "US/Eastern"
+                ],
+                [
+                    "US/Hawaii",
+                    "US/Hawaii"
+                ],
+                [
+                    "US/Indiana-Starke",
+                    "US/Indiana-Starke"
+                ],
+                [
+                    "US/Michigan",
+                    "US/Michigan"
+                ],
+                [
+                    "US/Mountain",
+                    "US/Mountain"
+                ],
+                [
+                    "US/Pacific",
+                    "US/Pacific"
+                ],
+                [
+                    "US/Pacific-New",
+                    "US/Pacific-New"
+                ],
+                [
+                    "US/Samoa",
+                    "US/Samoa"
+                ],
+                [
+                    "UTC",
+                    "UTC"
+                ],
+                [
+                    "Universal",
+                    "Universal"
+                ],
+                [
+                    "W-SU",
+                    "W-SU"
+                ],
+                [
+                    "WET",
+                    "WET"
+                ],
+                [
+                    "Zulu",
+                    "Zulu"
+                ],
+                [
+                    "Etc/GMT",
+                    "Etc/GMT"
+                ],
+                [
+                    "Etc/GMT+0",
+                    "Etc/GMT+0"
+                ],
+                [
+                    "Etc/GMT+1",
+                    "Etc/GMT+1"
+                ],
+                [
+                    "Etc/GMT+10",
+                    "Etc/GMT+10"
+                ],
+                [
+                    "Etc/GMT+11",
+                    "Etc/GMT+11"
+                ],
+                [
+                    "Etc/GMT+12",
+                    "Etc/GMT+12"
+                ],
+                [
+                    "Etc/GMT+2",
+                    "Etc/GMT+2"
+                ],
+                [
+                    "Etc/GMT+3",
+                    "Etc/GMT+3"
+                ],
+                [
+                    "Etc/GMT+4",
+                    "Etc/GMT+4"
+                ],
+                [
+                    "Etc/GMT+5",
+                    "Etc/GMT+5"
+                ],
+                [
+                    "Etc/GMT+6",
+                    "Etc/GMT+6"
+                ],
+                [
+                    "Etc/GMT+7",
+                    "Etc/GMT+7"
+                ],
+                [
+                    "Etc/GMT+8",
+                    "Etc/GMT+8"
+                ],
+                [
+                    "Etc/GMT+9",
+                    "Etc/GMT+9"
+                ],
+                [
+                    "Etc/GMT-0",
+                    "Etc/GMT-0"
+                ],
+                [
+                    "Etc/GMT-1",
+                    "Etc/GMT-1"
+                ],
+                [
+                    "Etc/GMT-10",
+                    "Etc/GMT-10"
+                ],
+                [
+                    "Etc/GMT-11",
+                    "Etc/GMT-11"
+                ],
+                [
+                    "Etc/GMT-12",
+                    "Etc/GMT-12"
+                ],
+                [
+                    "Etc/GMT-13",
+                    "Etc/GMT-13"
+                ],
+                [
+                    "Etc/GMT-14",
+                    "Etc/GMT-14"
+                ],
+                [
+                    "Etc/GMT-2",
+                    "Etc/GMT-2"
+                ],
+                [
+                    "Etc/GMT-3",
+                    "Etc/GMT-3"
+                ],
+                [
+                    "Etc/GMT-4",
+                    "Etc/GMT-4"
+                ],
+                [
+                    "Etc/GMT-5",
+                    "Etc/GMT-5"
+                ],
+                [
+                    "Etc/GMT-6",
+                    "Etc/GMT-6"
+                ],
+                [
+                    "Etc/GMT-7",
+                    "Etc/GMT-7"
+                ],
+                [
+                    "Etc/GMT-8",
+                    "Etc/GMT-8"
+                ],
+                [
+                    "Etc/GMT-9",
+                    "Etc/GMT-9"
+                ],
+                [
+                    "Etc/GMT0",
+                    "Etc/GMT0"
+                ],
+                [
+                    "Etc/Greenwich",
+                    "Etc/Greenwich"
+                ],
+                [
+                    "Etc/UCT",
+                    "Etc/UCT"
+                ],
+                [
+                    "Etc/UTC",
+                    "Etc/UTC"
+                ],
+                [
+                    "Etc/Universal",
+                    "Etc/Universal"
+                ],
+                [
+                    "Etc/Zulu",
+                    "Etc/Zulu"
+                ]
+            ],
+            "change_default": false,
+            "help": "The partner's timezone, used to output proper date and time values inside printed reports. It is important to set a value for this field. You should use the same timezone that is otherwise used to pick and render date and time values: your computer's timezone.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Timezone"
+        },
+        "signup_expiration": {
+            "change_default": false,
+            "string": "Signup expiration",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true
+        },
+        "y_ise_m": {
+            "change_default": false,
+            "string": "Martes",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "issued_total": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Journal Items",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "store": false,
+            "company_dependent": false,
+            "sortable": false,
+            "type": "monetary",
+            "currency_field": "currency_id"
+        },
+        "school_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Colegios",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "scat.school.student",
+            "context": {},
+            "relation_field": "student_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "property_account_payable_id": {
+            "domain": "[('internal_type', '=', 'payable'), ('deprecated', '=', False)]",
+            "change_default": false,
+            "help": "This account will be used instead of the default one as the payable account for the current partner",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.account",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Account Payable"
+        },
+        "credit": {
+            "group_operator": "sum",
+            "change_default": false,
+            "help": "Total amount this customer owes you.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "store": false,
+            "company_dependent": false,
+            "sortable": false,
+            "type": "monetary",
+            "currency_field": "currency_id",
+            "string": "Total Receivable"
+        },
+        "payment_next_action": {
+            "change_default": false,
+            "help": "This is the next action to be taken.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "text",
+            "store": true,
+            "string": "Next Action"
+        },
+        "commercial_partner_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Commercial Entity",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "is_company",
+                "parent_id.commercial_partner_id"
+            ],
+            "relation": "res.partner",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "message_unread": {
+            "change_default": false,
+            "help": "If checked new messages require your attention.",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false,
+            "string": "Unread Messages"
+        },
+        "message_needaction_counter": {
+            "group_operator": "sum",
+            "change_default": false,
+            "help": "Number of messages which requires an action",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false,
+            "string": "Number of Actions"
+        },
+        "comment": {
+            "change_default": false,
+            "string": "Notes",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "text",
+            "store": true
+        },
+        "sale_warn": {
+            "selection": [
+                [
+                    "no-message",
+                    "No Message"
+                ],
+                [
+                    "warning",
+                    "Warning"
+                ],
+                [
+                    "block",
+                    "Blocking Message"
+                ]
+            ],
+            "change_default": false,
+            "help": "Selecting the \"Warning\" option will notify user with the message, Selecting \"Blocking Message\" will throw an exception with the message and block the flow. The Message has to be written in the next field.",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Sales Order"
+        },
+        "y_ise_factura_aut": {
+            "change_default": false,
+            "string": "Semana completa",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "purchase_warn": {
+            "selection": [
+                [
+                    "no-message",
+                    "No Message"
+                ],
+                [
+                    "warning",
+                    "Warning"
+                ],
+                [
+                    "block",
+                    "Blocking Message"
+                ]
+            ],
+            "change_default": false,
+            "help": "Selecting the \"Warning\" option will notify user with the message, Selecting \"Blocking Message\" will throw an exception with the message and block the flow. The Message has to be written in the next field.",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Purchase Order"
+        },
+        "color": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Color Index",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "integer",
+            "store": true
+        },
+        "image": {
+            "change_default": false,
+            "help": "This field holds the image used as avatar for this contact, limited to 1024x1024px",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "attachment": true,
+            "company_dependent": false,
+            "sortable": true,
+            "type": "binary",
+            "store": true,
+            "string": "Image"
+        },
+        "invoice_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Invoices",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.invoice",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "team_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "If set, sale team used notably for sales and assignations related to this partner",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "crm.team",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true,
+            "string": "Sales Team"
+        },
+        "sale_order_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "# of Sales Order",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "y_ise_j": {
+            "change_default": false,
+            "string": "Jueves",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "course_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Cursos",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "scat.course",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "mandate_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Number of Mandates",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "trust": {
+            "selection": [
+                [
+                    "good",
+                    "Good Debtor"
+                ],
+                [
+                    "normal",
+                    "Normal Debtor"
+                ],
+                [
+                    "bad",
+                    "Bad Debtor"
+                ]
+            ],
+            "change_default": false,
+            "string": "Degree of trust you have in this debtor",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": true,
+            "sortable": false,
+            "type": "selection",
+            "store": false
+        },
+        "property_payment_term_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "This payment term will be used instead of the default one for sale orders and customer invoices",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.payment.term",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Customer Payment Terms"
+        },
+        "create_uid": {
+            "domain": [],
+            "change_default": false,
+            "string": "Created by",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "user_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "The internal user that is in charge of communicating with this contact if any.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true,
+            "string": "Salesperson"
+        },
+        "message_is_follower": {
+            "change_default": false,
+            "string": "Is Follower",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "message_follower_ids"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false
+        },
+        "ref_company_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Companies that refers to partner",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.company",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "message_last_post": {
+            "change_default": false,
+            "help": "Date of the last message posted on the record.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true,
+            "string": "Last Message Date"
+        },
+        "email_formatted": {
+            "change_default": false,
+            "help": "Format email address \"Name <email@domain>\"",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "name",
+                "email"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false,
+            "string": "Formatted Email"
+        },
+        "im_status": {
+            "change_default": false,
+            "string": "IM Status",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "translate": false,
+            "type": "char",
+            "store": false
+        },
+        "last_time_entries_checked": {
+            "change_default": false,
+            "help": "Last time the invoices & payments matching was performed for this partner. It is set either if there's not at least an unreconciled debit and an unreconciled credit or if you click the \"Done\" button.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true,
+            "string": "Latest Invoices & Payments Matching Date"
+        },
+        "y_ise_l": {
+            "change_default": false,
+            "string": "Lunes",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "type": {
+            "selection": [
+                [
+                    "contact",
+                    "Contact"
+                ],
+                [
+                    "invoice",
+                    "Invoice address"
+                ],
+                [
+                    "delivery",
+                    "Shipping address"
+                ],
+                [
+                    "other",
+                    "Other address"
+                ]
+            ],
+            "change_default": false,
+            "help": "Used to select automatically the right address according to the context in sales and purchases documents.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Address Type"
+        },
+        "opportunity_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Opportunity",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "function": {
+            "change_default": false,
+            "string": "Job Position",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "__last_update": {
+            "change_default": false,
+            "string": "Last Modified on",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "create_date",
+                "write_date"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "datetime",
+            "store": false
+        },
+        "picking_warn_msg": {
+            "change_default": false,
+            "string": "Message for Stock Picking",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "text",
+            "store": true
+        },
+        "zip": {
+            "change_default": true,
+            "string": "Zip",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "payment_token_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Count Payment Token",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "payment_token_ids"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "issue_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "# Issues",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "activities_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Activities",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "phone": {
+            "change_default": false,
+            "string": "Phone",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "task_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "# Tasks",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "payment_token_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Payment Tokens",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "payment.token",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "payment_responsible_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "Optionally you can assign a user to this field, which will make him responsible for the action.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true,
+            "string": "Follow-up Responsible"
+        },
+        "property_purchase_currency_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "This currency will be used, instead of the default one, for purchases from the current partner",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.currency",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Supplier Currency"
+        },
+        "sale_order_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Sales Order",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "sale.order",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "image_small": {
+            "change_default": false,
+            "help": "Small-sized image of this contact. It is automatically resized as a 64x64px image, with aspect ratio preserved. Use this field anywhere a small image is required.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "attachment": true,
+            "company_dependent": false,
+            "sortable": true,
+            "type": "binary",
+            "store": true,
+            "string": "Small-sized image"
+        },
+        "syga": {
+            "change_default": false,
+            "string": "SYGA",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "create_date": {
+            "change_default": false,
+            "string": "Created on",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true
+        },
+        "vat": {
+            "change_default": false,
+            "help": "Tax Identification Number. Fill it if the company is subjected to taxes. Used by the some of the legal statements.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true,
+            "string": "TIN"
+        },
+        "manual_followup": {
+            "change_default": false,
+            "string": "Manual Followup",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "state_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "State",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.country.state",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "invoice_warn_msg": {
+            "change_default": false,
+            "string": "Message for Invoice",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "text",
+            "store": true
+        },
+        "website": {
+            "change_default": false,
+            "help": "Website of Partner or Company",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true,
+            "string": "Website"
+        },
+        "valid_mandate_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "First Valid Mandate",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.banking.mandate",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2one",
+            "store": false
+        },
+        "message_channel_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Followers (Channels)",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "message_follower_ids"
+            ],
+            "relation": "mail.channel",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2many",
+            "store": false
+        },
+        "message_partner_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Followers (Partners)",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "message_follower_ids"
+            ],
+            "relation": "res.partner",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2many",
+            "store": false
+        },
+        "company_type": {
+            "selection": [
+                [
+                    "person",
+                    "Individual"
+                ],
+                [
+                    "company",
+                    "Company"
+                ]
+            ],
+            "change_default": false,
+            "string": "Company Type",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "is_company"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "selection",
+            "store": false
+        },
+        "signup_type": {
+            "change_default": false,
+            "string": "Signup Token Type",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "property_account_receivable_id": {
+            "domain": "[('internal_type', '=', 'receivable'), ('deprecated', '=', False)]",
+            "change_default": false,
+            "help": "This account will be used instead of the default one as the receivable account for the current partner",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.account",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Account Receivable"
+        },
+        "partner_share": {
+            "change_default": false,
+            "help": "Either customer (no user), either shared user. Indicated the current partner is a customer without access or with a limited access created for sharing data.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "user_ids.share"
+            ],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true,
+            "string": "Share Partner"
+        },
+        "x_ise_centro": {
+            "change_default": false,
+            "string": "Centro",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "message_ids": {
+            "domain": [
+                [
+                    "model",
+                    "=",
+                    "res.partner"
+                ]
+            ],
+            "change_default": false,
+            "string": "Messages",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "mail.message",
+            "context": {},
+            "relation_field": "res_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "meeting_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Meetings",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "calendar.event",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2many",
+            "store": true
+        },
+        "date": {
+            "change_default": false,
+            "string": "Date",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "date",
+            "store": true
+        },
+        "not_update_parent": {
+            "change_default": false,
+            "string": "No actualizar padre",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "sii_simplified_invoice": {
+            "change_default": false,
+            "help": "Checking this mark, invoices done to this partner will be sent to SII as simplified invoices.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true,
+            "string": "Simplified invoices in SII?"
+        },
+        "self": {
+            "domain": [],
+            "change_default": false,
+            "string": "Self",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.partner",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2one",
+            "store": false
+        },
+        "bank_account_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Bank",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "id": {
+            "change_default": false,
+            "string": "ID",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "integer",
+            "store": true
+        },
+        "property_account_position_id": {
+            "domain": [],
+            "change_default": false,
+            "help": "The fiscal position will determine taxes and accounts used for the partner.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.fiscal.position",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Fiscal Position"
+        },
+        "company_name": {
+            "change_default": false,
+            "string": "Company Name",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "property_stock_supplier": {
+            "domain": [],
+            "change_default": false,
+            "help": "This stock location will be used, instead of the default one, as the source location for goods you receive from the current partner",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "stock.location",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Vendor Location"
+        },
+        "is_company": {
+            "change_default": false,
+            "help": "Check if the contact is a company, otherwise it is a person",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true,
+            "string": "Is a Company"
+        },
+        "bank_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Banks",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.partner.bank",
+            "context": {},
+            "relation_field": "partner_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "not_modify_bank_data": {
+            "change_default": false,
+            "string": "No modificar los datos bancarios",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "write_date": {
+            "change_default": false,
+            "string": "Last Updated on",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true
+        },
+        "property_stock_customer": {
+            "domain": [],
+            "change_default": false,
+            "help": "This stock location will be used, instead of the default one, as the destination location for goods you send to this partner",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "stock.location",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Customer Location"
+        },
+        "category_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Tags",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.partner.category",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2many",
+            "store": true
+        },
+        "lang": {
+            "selection": [
+                [
+                    "es_ES",
+                    "Spanish / Español"
+                ]
+            ],
+            "change_default": false,
+            "help": "If the selected language is loaded in the system, all documents related to this contact will be printed in this language. If not, it will be English.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Language"
+        },
+        "credit_limit": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "Credit Limit",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "float",
+            "store": true
+        },
+        "meeting_count": {
+            "group_operator": "sum",
+            "change_default": false,
+            "string": "# Meetings",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false
+        },
+        "purchase_warn_msg": {
+            "change_default": false,
+            "string": "Message for Purchase Order",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "text",
+            "store": true
+        },
+        "mobile": {
+            "change_default": false,
+            "string": "Mobile",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "payment_note": {
+            "change_default": false,
+            "help": "Payment Note",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "text",
+            "store": true,
+            "string": "Customer Payment Promise"
+        },
+        "sale_warn_msg": {
+            "change_default": false,
+            "string": "Message for Sales Order",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "text",
+            "store": true
+        },
+        "y_ise_s": {
+            "change_default": false,
+            "string": "Esporádico",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "boolean",
+            "store": true
+        },
+        "supplier_payment_mode_id": {
+            "domain": [
+                [
+                    "payment_type",
+                    "=",
+                    "outbound"
+                ]
+            ],
+            "change_default": false,
+            "help": "Select the default payment mode for this supplier.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.payment.mode",
+            "context": {},
+            "company_dependent": true,
+            "sortable": false,
+            "type": "many2one",
+            "store": false,
+            "string": "Supplier Payment Mode"
+        }
+    },
+    "message": "success"
+}

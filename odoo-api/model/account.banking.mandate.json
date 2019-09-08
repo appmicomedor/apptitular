@@ -1,0 +1,576 @@
+{
+    "error": false,
+    "data": {
+        "message_follower_ids": {
+            "domain": [
+                [
+                    "res_model",
+                    "=",
+                    "account.banking.mandate"
+                ]
+            ],
+            "change_default": false,
+            "string": "Followers",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "mail.followers",
+            "context": {},
+            "relation_field": "res_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "create_date": {
+            "change_default": false,
+            "string": "Created on",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true
+        },
+        "partner_bank_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Bank Account",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.partner.bank",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "scan": {
+            "change_default": false,
+            "string": "Scan of the Mandate",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "attachment": false,
+            "company_dependent": false,
+            "sortable": true,
+            "type": "binary",
+            "store": true
+        },
+        "message_needaction": {
+            "change_default": false,
+            "help": "If checked, new messages require your attention.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false,
+            "string": "Action Needed"
+        },
+        "message_channel_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Followers (Channels)",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "message_follower_ids"
+            ],
+            "relation": "mail.channel",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2many",
+            "store": false
+        },
+        "message_partner_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Followers (Partners)",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "message_follower_ids"
+            ],
+            "relation": "res.partner",
+            "context": {},
+            "company_dependent": false,
+            "sortable": false,
+            "type": "many2many",
+            "store": false
+        },
+        "write_uid": {
+            "domain": [],
+            "change_default": false,
+            "string": "Last Updated by",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "partner_id": {
+            "domain": [
+                "|",
+                [
+                    "is_company",
+                    "=",
+                    true
+                ],
+                [
+                    "parent_id",
+                    "=",
+                    false
+                ]
+            ],
+            "change_default": false,
+            "string": "Partner",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "related": [
+                "partner_bank_id",
+                "partner_id"
+            ],
+            "states": {},
+            "depends": [
+                "partner_bank_id.partner_id"
+            ],
+            "relation": "res.partner",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "message_ids": {
+            "domain": [
+                [
+                    "model",
+                    "=",
+                    "account.banking.mandate"
+                ]
+            ],
+            "change_default": false,
+            "string": "Messages",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "mail.message",
+            "context": {},
+            "relation_field": "res_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "create_uid": {
+            "domain": [],
+            "change_default": false,
+            "string": "Created by",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.users",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "display_name": {
+            "change_default": false,
+            "string": "Display name",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "unique_mandate_reference",
+                "recurrent_sequence_type"
+            ],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true
+        },
+        "message_is_follower": {
+            "change_default": false,
+            "string": "Is Follower",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "message_follower_ids"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false
+        },
+        "__last_update": {
+            "change_default": false,
+            "string": "Last Modified on",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [
+                "create_date",
+                "write_date"
+            ],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "datetime",
+            "store": false
+        },
+        "format": {
+            "selection": [
+                [
+                    "basic",
+                    "Basic Mandate"
+                ],
+                [
+                    "sepa",
+                    "Sepa Mandate"
+                ]
+            ],
+            "change_default": false,
+            "string": "Mandate Format",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true
+        },
+        "message_last_post": {
+            "change_default": false,
+            "help": "Date of the last message posted on the record.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true,
+            "string": "Last Message Date"
+        },
+        "company_id": {
+            "domain": [],
+            "change_default": false,
+            "string": "Company",
+            "searchable": true,
+            "required": true,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "res.company",
+            "context": {},
+            "company_dependent": false,
+            "sortable": true,
+            "type": "many2one",
+            "store": true
+        },
+        "id": {
+            "change_default": false,
+            "string": "ID",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "integer",
+            "store": true
+        },
+        "state": {
+            "selection": [
+                [
+                    "draft",
+                    "Draft"
+                ],
+                [
+                    "valid",
+                    "Valid"
+                ],
+                [
+                    "expired",
+                    "Expired"
+                ],
+                [
+                    "cancel",
+                    "Cancelled"
+                ]
+            ],
+            "change_default": false,
+            "help": "Only valid mandates can be used in a payment line. A cancelled mandate is a mandate that has been cancelled by the customer.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Status"
+        },
+        "message_unread_counter": {
+            "group_operator": "sum",
+            "change_default": false,
+            "help": "Number of unread messages",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false,
+            "string": "Unread Messages Counter"
+        },
+        "scheme": {
+            "selection": [
+                [
+                    "CORE",
+                    "Basic (CORE)"
+                ],
+                [
+                    "B2B",
+                    "Enterprise (B2B)"
+                ]
+            ],
+            "change_default": false,
+            "string": "Scheme",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true
+        },
+        "type": {
+            "selection": [
+                [
+                    "recurrent",
+                    "Recurrent"
+                ],
+                [
+                    "oneoff",
+                    "One-Off"
+                ]
+            ],
+            "change_default": false,
+            "string": "Type of Mandate",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true
+        },
+        "last_debit_date": {
+            "change_default": false,
+            "string": "Date of the Last Debit",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "date",
+            "store": true
+        },
+        "write_date": {
+            "change_default": false,
+            "string": "Last Updated on",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "datetime",
+            "store": true
+        },
+        "payment_line_ids": {
+            "domain": [],
+            "change_default": false,
+            "string": "Related Payment Lines",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "relation": "account.payment.line",
+            "context": {},
+            "relation_field": "mandate_id",
+            "company_dependent": false,
+            "sortable": true,
+            "type": "one2many",
+            "store": true
+        },
+        "recurrent_sequence_type": {
+            "selection": [
+                [
+                    "first",
+                    "First"
+                ],
+                [
+                    "recurring",
+                    "Recurring"
+                ],
+                [
+                    "final",
+                    "Final"
+                ]
+            ],
+            "change_default": false,
+            "help": "This field is only used for Recurrent mandates, not for One-Off mandates.",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "selection",
+            "store": true,
+            "string": "Sequence Type for Next Debit"
+        },
+        "unique_mandate_reference": {
+            "change_default": false,
+            "string": "Unique Mandate Reference",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "translate": false,
+            "type": "char",
+            "store": true,
+            "size": 35
+        },
+        "signature_date": {
+            "change_default": false,
+            "string": "Date of Signature of the Mandate",
+            "searchable": true,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": true,
+            "type": "date",
+            "store": true
+        },
+        "message_unread": {
+            "change_default": false,
+            "help": "If checked new messages require your attention.",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "boolean",
+            "store": false,
+            "string": "Unread Messages"
+        },
+        "message_needaction_counter": {
+            "group_operator": "sum",
+            "change_default": false,
+            "help": "Number of messages which requires an action",
+            "searchable": false,
+            "required": false,
+            "manual": false,
+            "readonly": true,
+            "states": {},
+            "depends": [],
+            "company_dependent": false,
+            "sortable": false,
+            "type": "integer",
+            "store": false,
+            "string": "Number of Actions"
+        }
+    },
+    "message": "success"
+}

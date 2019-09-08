@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-9 text-left padding>
+        <ion-title>Calendario</ion-title>
+        <div class="child-name">{{child.name}}</div>
+      </ion-col>
+      <ion-col col-3 class="p-t-10 p-r-20" text-right>
+        <ion-icon name="close" class="pointer close-icon" (click)="closeModal()"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-row class="p-t-0">
+      <ion-col class="p-t-0">
+        <ion-calendar [(ngModel)]="dateYMD" (onChange)="onChange($event)" (monthChange)="onMonthChange($event)"
+          [type]="type" [format]="'YYYY-MM-DD'" [options]="optionsRange">
+        </ion-calendar>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="8" class="p-t-0">
+        <div class="bigdate">{{dateFmt}}</div>
+        <div class="status">{{status}}</div>
+      </ion-col>
+      <ion-col size="4" class="p-t-0 p-b-0">
+        <ion-button *ngIf="can_modify" size="medium" style="--color:#ffffff;--background:#00584c;" (click)="changeDay()"><ion-icon ios="ios-create" md="md-create"></ion-icon>&nbsp;Cambiar</ion-button>
+      </ion-col>      
+    </ion-row>
+    <ion-row *ngIf="preaviso!=-1">
+      <ion-col col-8 class="smalltxt">
+        <span *ngIf="preaviso>0">Nota: Debe modificar la asistencia con {{preaviso}} días de antelación.</span>
+        <span *ngIf="preaviso==0">Nota: Puede modificar la asistencia el mismo día antes de las 10 de la mañana.</span>
+      </ion-col>
+    </ion-row>
+
+
+
+</ion-content>
+
+<!--ion-footer>
+  <ion-button size="medium" style="width: 50%;margin:auto;margin-top: 10px;--color:#00584c;--background:#ffffff;"
+    (click)="closeModal()" expand="block">Cerrar</ion-button>
+</ion-footer-->
