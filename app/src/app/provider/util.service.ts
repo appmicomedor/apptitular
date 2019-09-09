@@ -77,6 +77,42 @@ export class UtilService {
     return result;
   }
 
+  formatDateTime(dt)
+  {
+    if (dt==null || dt=='')
+      return '';
+
+    var date = new Date(dt);
+
+    var dd = date.getDate();
+    var mm = date.getMonth()+1; //January is 0!
+    var h = date.getHours();
+    var m = date.getMinutes();
+    
+    var yyyy = date.getFullYear();
+    let result = '';
+
+    if(dd<10)
+      result+= '0';
+    result+=dd + '/';
+
+    if(mm<10)
+      result+= '0';
+    result+=mm + '/';
+
+    result+=yyyy + ' ';
+
+    if(h<10)
+      result+= '0';
+    result+=h + ':';
+
+    if(m<10)
+      result+= '0';
+    result+=m;
+
+    return result; 
+  } 
+    
   getDaysInMonth(month, year) {
     var date = new Date(year, month, 1);
     var days = [];

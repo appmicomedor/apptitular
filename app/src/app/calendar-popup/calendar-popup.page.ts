@@ -316,7 +316,8 @@ export class CalendarPopupPage implements OnInit {
       userId: user.db_id,
       parentId: user.id,
       childId: this.child.id,
-      date: this.date
+      date: this.date,
+      titular: user.name,
     }
 
     this.data = null;

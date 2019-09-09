@@ -61,7 +61,7 @@ export class LoginPage implements OnInit {
       if(response['error']){
         this.presentToast(response['message']);
       }else{
-        console.log('data ' + JSON.stringify(response['data']));
+        //console.log('data ' + JSON.stringify(response['data']));
         this.userService.saveUser(response['data']);
         this.router.navigateByUrl('/info');
       }      

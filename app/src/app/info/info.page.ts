@@ -31,7 +31,6 @@ export class InfoPage implements OnInit {
 
   }
 
-
   async cerrarSesion(){
     const alert = await this.alertCtrl.create({
       subHeader: 'Cierre de sesión',
@@ -76,6 +75,11 @@ export class InfoPage implements OnInit {
   }
 
   openHistorico(child){
-    
+    let navigationExtras: NavigationExtras = {
+      state: {
+        child: child
+      }
+    };
+    this.router.navigate(['historico'], navigationExtras);
   }
 }

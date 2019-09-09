@@ -60,16 +60,17 @@ class DbApi {
         this.dbConn.query(sql);
     }
 
-    setHistorial(userId, parentId, childId, date, value){        
+    setHistorial(userId, parentId, childId, date, value, titular){        
         let contador = 0;
         let dt = this.toMysqlFormat(new Date());
 
         let mysql_date = this.toMysqlFormat(new Date(date));
+
         let sql = "\
                 INSERT INTO historial\
-                    (userId, parentId, childId, date, createdAt, value)\
+                    (userId, parentId, childId, date, createdAt, value, titular)\
                 VALUES\
-                    (" + userId + "," + parentId + "," + childId + ",'" + mysql_date + "','" + dt + "'," + value + ");"
+                    (" + userId + "," + parentId + "," + childId + ",'" + mysql_date + "','" + dt + "'," + value + ",'" + titular + "');"
 
         //console.log('sql ' + sql);
         this.dbConn.query(sql);
@@ -81,14 +82,56 @@ class DbApi {
         return d.toString();
     }
 
-    toMysqlFormat(date) {
-        return date.toISOString().slice(0, 19).replace('T', ' ');
+    /*toMysqlFormat(date) {
+        //return date.toUTCString().slice(0, 19).replace('T', ' ');
+        return date..slice(0, 19).replace('T', ' ');
         //return date.getUTCFullYear() + "-" + this.twoDigits(1 + date.getUTCMonth()) + "-" + this.twoDigits(date.getUTCDate()) + " " + this.twoDigits(date.getUTCHours()) + ":" + this.twoDigits(date.getUTCMinutes()) + ":" + this.twoDigits(date.getUTCSeconds());
-    };
+    };*/
 
     toDateFormat(timestamp) {
         return new Date(timestamp);
     }
+
+    toMysqlFormat(dt)
+    {
+      if (dt==null || dt=='')
+        return '';
+  
+      var date = new Date(dt);
+  
+      var dd = date.getDate();
+      var mm = date.getMonth()+1; //January is 0!
+      var h = date.getHours();
+      var m = date.getMinutes();
+      var s = date.getSeconds();
+      
+      var yyyy = date.getFullYear();
+      let result = '' + yyyy + '-';
+  
+      if(mm<10)
+        result+= '0';
+      result+=mm + '-';
+  
+      if(dd<10)
+        result+= '0';
+      result+=dd + ' ';
+  
+      if(h<10)
+        result+= '0';
+      result+=h + ':';
+  
+      if(m<10)
+        result+= '0';
+      result+=m + ':';
+  
+      if(s<10)
+        result+= '0';
+      result+=s;
+  
+      return result; 
+    } 
+  
+
 }
 
 module.exports = DbApi;

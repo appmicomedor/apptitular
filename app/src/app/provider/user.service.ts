@@ -15,7 +15,10 @@ export class UserService {
   saveUser(data) {
     this.user = data;
     this.storage.set('user', this.user);
-    this.isAuth = true;
+    if (data)
+      this.isAuth = true;
+    else 
+      this.isAuth = false;
   }
 
   setUser(user) {

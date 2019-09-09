@@ -28,3 +28,6 @@ ALTER TABLE `historial`
 
 ALTER TABLE `historial`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+ALTER TABLE `historial` ADD COLUMN `titular` varchar(512) DEFAULT NULL;
+ALTER TABLE `historial` ADD COLUMN `tipo` int(1) DEFAULT 0;
