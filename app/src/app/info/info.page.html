@@ -1,6 +1,13 @@
 <ion-header>
-  <ion-toolbar style="text-align: center;">
-    <img src="assets/image/header.png" style="position: relative;z-index:11;width: 50%;max-width: 250px;">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col col-9 text-left>
+        <img src="assets/image/header.png" style="z-index:11;width: 200px;">
+      </ion-col>
+      <ion-col col-3 class="p-r-20" text-right>
+        <ion-icon name="exit" class="pointer exit-icon" (click)="cerrarSesion()"></ion-icon>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
@@ -18,7 +25,7 @@
       <p style="padding-left: 10px;"><strong>Cta. Bancaria:</strong> {{user['bank'].acc_number}}</p>
     </div>
     <div style="font-size: 20px;font-weight: bold;padding-left: 20px;">Comensales</div>
-    <div class="child" style="padding-left: 15px;">
+    <div class="child">
       <div *ngIf="user['childs'].length > 0">
           <ion-card *ngFor="let child of user['childs']">
             <ion-card-header>
@@ -26,9 +33,10 @@
               <ion-card-subtitle *ngIf="child.x_ise_centro && child.x_ise_centro!='false'">{{child.x_ise_centro}}</ion-card-subtitle>
             </ion-card-header>
           
-            <ion-card-content>
-              <ion-button size="medium" style="--color:#ffffff;--background:#00584c;" (click)="openCalendar(child)"><ion-icon name="calendar"></ion-icon>&nbsp;Calendario comedor</ion-button>                  
-              <ion-button size="medium" style="--color:#ffffff;--background:#00584c;" (click)="openHistorico(child)"><ion-icon name="time"></ion-icon>&nbsp;Histórico de peticiones</ion-button>                  
+            <ion-card-content text-center>
+              <ion-button size="medium" class="child-button" (click)="openCalendar(child)"><ion-icon name="calendar"></ion-icon>&nbsp;Calendario comedor</ion-button>                  
+              <ion-button size="medium" class="child-button" (click)="openHistorico(child)"><ion-icon name="time"></ion-icon>&nbsp;Histórico de peticiones</ion-button>                  
+              <ion-button size="medium" class="child-button" (click)="openAsistencia(child)"><ion-icon name="settings"></ion-icon>&nbsp;Configuración de asistencia</ion-button>                  
             </ion-card-content>
           </ion-card>
       </div>
@@ -37,7 +45,5 @@
       </div>
     </div>
   </div>
-  <div style="text-align: center;">
-    <ion-button size="medium" style="width: 50%;margin:auto;margin-top: 30px;--color:#00584c;--background:#ffffff;" (click)="cerrarSesion()"  expand="block">Cerrar sesión</ion-button>
-  </div>
+
 </ion-content>

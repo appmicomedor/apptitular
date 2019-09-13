@@ -29,12 +29,20 @@ ion-back-button{
 
 .close-icon
 {
-  color: #00c0a6 !important;
+
   color: white !important;
   padding-top: 10px;
   font-size: 24px;
   border-radius: 100%;
   font-weight: bold;
+}  
+
+.exit-icon
+{
+  color: white !important;
+  font-size: 40px;
+  font-weight: bold;
+  padding-top: 5px;
 }  
 
 .divided-line
@@ -69,4 +77,16 @@ ion-calendar-week .week-title.transparent{
 }
 .p-t-0{
   padding-top: 0px!important;
+}
+
+.child-button {
+  --color:#ffffff;
+  --background:#00584c;
+  width: 250px!important;
+  text-align: center!important;
+}
+
+
+.pointer{
+  cursor: pointer;
 }
