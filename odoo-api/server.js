@@ -179,7 +179,7 @@ app.post('/login', function (req, res) {
                                 if (err) { return res.send({ error: true, message: 'Error de acceso' }); }
                                 var inParams = [];
                                 inParams.push(value); //ids
-                                inParams.push(['name', 'x_ise_centro', 'active_school_id']); //fields
+                                inParams.push(['name', 'x_ise_centro', 'active_school_id', 'company_id']); //fields
 
                                 odoo.execute_kw('res.partner', 'read', [inParams], function (err, value) {
                                     if (err) { return res.send({ error: true, message: 'Error de acceso' }); }

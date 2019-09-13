@@ -25,6 +25,24 @@ export class InfoPage implements OnInit {
     private modalCtrl: ModalController,
   ) {
     this.user = this.userService.getUser();
+
+    for (var i = 0; i < this.user['childs'].length; i++) {
+      if (this.user['childs'][i].company_id){
+        let company_id = this.user['childs'][i].company_id[0];
+        if (company_id==1){
+          this.user['childs'][i].catering_logo = 'assets/image/perearojas.png';
+        }
+        else if (company_id==3){
+          this.user['childs'][i].catering_logo = 'assets/image/villablanca.png';
+        }
+        else if (company_id==4){
+          this.user['childs'][i].catering_logo = 'assets/image/servicol.png';
+        }
+      }
+    }
+
+
+
   }
 
   ngOnInit() {
