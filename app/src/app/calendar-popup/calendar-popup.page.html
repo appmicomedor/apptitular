@@ -29,7 +29,7 @@
         <div class="status">{{status}}</div>
       </ion-col>
       <ion-col size="4" class="p-t-0 p-b-0">
-        <ion-button *ngIf="can_modify" size="medium" style="--color:#ffffff;--background:#00584c;" (click)="changeDay()"><ion-icon ios="ios-create" md="md-create"></ion-icon>&nbsp;Cambiar</ion-button>
+        <ion-button [disabled]="!can_modify" size="medium" style="--color:#ffffff;--background:#00584c;" (click)="changeDay()"><ion-icon ios="ios-create" md="md-create"></ion-icon>&nbsp;Cambiar</ion-button>
       </ion-col>      
     </ion-row>
     <ion-row *ngIf="preaviso!=-1">
