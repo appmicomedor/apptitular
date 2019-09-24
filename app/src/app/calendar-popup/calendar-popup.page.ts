@@ -63,12 +63,12 @@ export class CalendarPopupPage implements OnInit {
     this.dateYMD = this.utilService.formatYMD(this.date);
     this.dateFmt = this.utilService.presentDate(this.date);
 
-    this.daysConfig = [];    
+    this.daysConfig = [];   
+     
   
   }
  
-  ngOnInit() {
-    this.getDaysConfig(this.date.getFullYear(), this.date.getMonth() + 1);        
+  ngOnInit() {  
     this.getPreaviso();
   }
  
@@ -123,10 +123,18 @@ export class CalendarPopupPage implements OnInit {
 
     let dif_days  = ((Date.UTC(this.date.getFullYear(), this.date.getMonth(), this.date.getDate()) - Date.UTC(this.server_time.getFullYear(), this.server_time.getMonth(), this.server_time.getDate()) ) /(1000 * 60 * 60 * 24));
   
+
+    console.log(days_preaviso + ' > ' + dif_days);
+
+
     if (days_preaviso>dif_days)
       this.can_modify = false;
     else  
       this.can_modify = true;
+
+      console.log('can_modify ' + this.can_modify);      
+      console.log('h ' + h);      
+      console.log('this.preaviso ' + this.preaviso);      
   }
 
 
@@ -246,6 +254,7 @@ export class CalendarPopupPage implements OnInit {
 
     if (!this.child.active_school_id || this.child.active_school_id.length==0){
       this.preaviso = 0;
+      this.getDaysConfig(this.date.getFullYear(), this.date.getMonth() + 1);
       return;
     }
 
@@ -264,6 +273,9 @@ export class CalendarPopupPage implements OnInit {
       else {
         $this.preaviso = 0;
       }
+
+      $this.getDaysConfig($this.date.getFullYear(), $this.date.getMonth() + 1);
+
     });
   }  
 

@@ -32,7 +32,7 @@
               <ion-row>
                 <ion-col size="7">
                   <ion-card-title>{{child.name}}</ion-card-title>
-                  <ion-card-subtitle *ngIf="child.x_ise_centro && child.x_ise_centro!='false'">{{child.x_ise_centro}}</ion-card-subtitle>
+                  <ion-card-subtitle *ngIf="child.active_school_id && child.active_school_id.length>0">{{child.active_school_id[1]}}</ion-card-subtitle>
                   <ion-card-subtitle *ngIf="child.company_id && child.company_id.length>0">{{child.company_id[1]}}</ion-card-subtitle>                      
                 </ion-col>
                 <ion-col size="5" style="padding-top:0px;padding-right:0px;">
