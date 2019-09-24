@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'info', loadChildren: './info/info.module#InfoPageModule' },
   { path: 'calendar-popup', loadChildren: './calendar-popup/calendar-popup.module#CalendarPopupPageModule' },
+  { path: 'asistencia-popup', loadChildren: './asistencia-popup/asistencia-popup.module#AsistenciaPopupPageModule' },
   { path: 'historico', loadChildren: './historico/historico.module#HistoricoPageModule' },
 
   

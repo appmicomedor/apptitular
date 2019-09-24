@@ -14,10 +14,12 @@
 <ion-content>
   <div *ngIf="user == null" style="text-align: center;padding-top: 100px;">
     <p style="font-size: 30px;">No Información</p>
+    <p style="font-weight: normal;font-size:12px;text-align: center;">Versión: {{app_version}}</p>    
   </div>
   <div *ngIf="user != null">
     <div class="parent" style="padding-left: 20px;">
       <p style="font-weight: bold;font-size:20px;text-align: center;">Información general</p>
+      <p style="font-weight: normal;font-size:12px;text-align: center;">Versión: {{app_version}}</p>
     </div>
     <div style="font-size: 20px;font-weight: bold;padding-left: 20px;">Titular</div>
     <div style="padding-left: 20px;">
@@ -44,7 +46,7 @@
             <ion-card-content text-center>
               <ion-button size="medium" class="child-button" (click)="openCalendar(child)"><ion-icon name="calendar"></ion-icon>&nbsp;Calendario comedor</ion-button>                  
               <ion-button size="medium" class="child-button" (click)="openHistorico(child)"><ion-icon name="time"></ion-icon>&nbsp;Histórico de peticiones</ion-button>                  
-              <!--ion-button size="medium" class="child-button" (click)="openAsistencia(child)"><ion-icon name="settings"></ion-icon>&nbsp;Configuración de asistencia</ion-button-->
+              <ion-button size="medium" class="child-button" (click)="openAsistencia(child)"><ion-icon name="settings"></ion-icon>&nbsp;Configuración de asistencia</ion-button>
             </ion-card-content>
           </ion-card>
       </div>

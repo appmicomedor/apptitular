@@ -5,15 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { InfoPage } from './info.page';
-
-import { CalendarPopupPageModule } from './../calendar-popup/calendar-popup.module';
-import { AsistenciaPopupPageModule } from './../asistencia-popup/asistencia-popup.module';
+import { AsistenciaPopupPage } from './asistencia-popup.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: InfoPage
+    path: 'asistencia',
+    component: AsistenciaPopupPage
   }
 ];
 
@@ -22,10 +19,11 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    CalendarPopupPageModule,
-    AsistenciaPopupPageModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [InfoPage]
+  declarations: [AsistenciaPopupPage],
+  entryComponents: [
+    AsistenciaPopupPage
+  ]
 })
-export class InfoPageModule {}
+export class AsistenciaPopupPageModule {}

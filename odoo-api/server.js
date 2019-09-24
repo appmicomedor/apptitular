@@ -248,6 +248,28 @@ app.post('/get_preaviso', function (req, res) {
     });
 });
 
+app.post('/get_asistencia', function (req, res) {
+
+    odoo.connect(function (err) {
+        if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });
+
+        var inParams = [];
+        inParams.push([['id', '=', Number(req.body.child_id)]]);
+        odoo.execute_kw('res.partner', 'search', [inParams], function (err, value) {
+            if (err || !value || value.length == 0) { return res.send({ error: true, message: 'No hay datos '  }); }
+
+            var inParams = [];
+            inParams.push(value); //ids
+            inParams.push(['y_ise_factura_aut', 'y_ise_s', 'y_ise_l', 'y_ise_m', 'y_ise_x', 'y_ise_j', 'y_ise_v']); //fields
+
+            odoo.execute_kw('res.partner', 'read', [inParams], function (err, value) {
+                if (err || !value || value.length == 0) return res.send({ error: true, message: 'Error de acceso' });
+                return res.send({ error: false, data: value, message: 'success' });
+            });
+        });
+    });
+});
+
 
 app.post('/set_day', function (req, res) {
 

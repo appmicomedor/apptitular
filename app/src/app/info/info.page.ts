@@ -5,6 +5,7 @@ import { AuthHttpService } from '../auth/auth-http.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { UserService } from '../provider/user.service';
 import { CalendarPopupPage } from '../calendar-popup/calendar-popup.page'
+import { AsistenciaPopupPage } from '../asistencia-popup/asistencia-popup.page'
 
 @Component({
   selector: 'app-info',
@@ -14,6 +15,7 @@ import { CalendarPopupPage } from '../calendar-popup/calendar-popup.page'
 export class InfoPage implements OnInit {
 
   user: any;
+  app_version: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,13 +42,10 @@ export class InfoPage implements OnInit {
         }
       }
     }
-
-
-
   }
 
   ngOnInit() {
-
+    this.app_version = '1.0.3';
   }
 
   async cerrarSesion(){
@@ -100,4 +99,22 @@ export class InfoPage implements OnInit {
     };
     this.router.navigate(['historico'], navigationExtras);
   }
+
+  async openAsistencia(child){
+    const modal = await this.modalCtrl.create({
+      component: AsistenciaPopupPage,
+      componentProps: {
+        "child": child,
+      }
+    });
+ 
+    modal.onDidDismiss().then((data) => {
+      if (data !== null) {
+
+      }
+    });
+ 
+    return await modal.present();
+  }
+
 }
