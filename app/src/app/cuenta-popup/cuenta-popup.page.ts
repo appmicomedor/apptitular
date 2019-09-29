@@ -40,7 +40,7 @@ export class CuentaPopupPage implements OnInit {
   }
  
   ngOnInit() {  
-    console.log('user ' + JSON.stringify(this.user));
+
   }
  
   async closeModal() {
@@ -66,7 +66,7 @@ export class CuentaPopupPage implements OnInit {
       }
   
       this.data = null;
-      this.httpService.request('POST', 'save_bank', param).subscribe(response => {
+      this.httpService.request('POST', 'set_bank', param).subscribe(response => {
   
         console.log('response ' + JSON.stringify(response));
         if (!response['error']) {    

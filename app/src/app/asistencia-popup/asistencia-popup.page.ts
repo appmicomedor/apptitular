@@ -57,8 +57,30 @@ export class AsistenciaPopupPage implements OnInit {
  
   accept() 
   {
+
+    // Guardamos nueva asistencia
+    let param = {
+      child_id:  this.child.id,
+      y_ise_factura_aut: this.semana,
+      y_ise_s: this.esporadico,
+      y_ise_l: this.pordias && this.dias[0].isChecked,
+      y_ise_m: this.pordias && this.dias[1].isChecked,
+      y_ise_x: this.pordias && this.dias[2].isChecked,
+      y_ise_j: this.pordias && this.dias[3].isChecked,
+      y_ise_v: this.pordias && this.dias[4].isChecked,
+    }
+
+    this.data = null;
+    this.httpService.request('POST', 'set_asistencia', param).subscribe(response => {
+      if (!response['error']) {    
+
+      }
+      else {
+        this.presentToast('No se ha podido modificar su cuenta bancaria, inténtelo más tarde o contacte con soporte');
+      }
+    });
+
     this.closeModal();
-    //this.modalController.dismiss({date: new Date(this.date)});
   }
 
   async presentLoading() {
@@ -80,11 +102,8 @@ export class AsistenciaPopupPage implements OnInit {
     this.data = null;
     this.httpService.request('POST', 'get_asistencia', param).subscribe(response => {
 
-
-      
       if (!response['error']) {    
         this.data = response['data'][0];
-        console.log('get_asistencia ' + JSON.stringify(this.data));
         this.updateRadios();
         //$this.preaviso = temp.preaviso;
       }

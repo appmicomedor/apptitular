@@ -270,6 +270,31 @@ app.post('/get_asistencia', function (req, res) {
     });
 });
 
+app.post('/set_asistencia', function (req, res) {
+
+    odoo.connect(function (err) {
+        if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });
+
+        var inParams = [];
+        inParams.push([Number(req.body.child_id)]); //id to update
+        inParams.push({
+            'y_ise_factura_aut': req.body.y_ise_factura_aut,
+            'y_ise_s': req.body.y_ise_s,
+            'y_ise_l': req.body.y_ise_l,
+            'y_ise_m': req.body.y_ise_m,
+            'y_ise_x': req.body.y_ise_x,
+            'y_ise_j': req.body.y_ise_j,
+            'y_ise_v': req.body.y_ise_v,
+        });
+
+        
+        odoo.execute_kw('res.partner', 'write', [inParams], function (err, value) {
+            if (err) { return res.send({ error: true, data: err, message: 'Error escritura en backend, contacte con soporte' }); }
+            return res.send({ error: false, data: value, message: 'success' });
+        });
+    });
+});
+
 
 app.post('/set_day', function (req, res) {
 
@@ -291,7 +316,7 @@ app.post('/set_day', function (req, res) {
     });
 });
 
-app.post('/save_bank', function (req, res) {
+app.post('/set_bank', function (req, res) {
 
     odoo.connect(function (err) {
         if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });
