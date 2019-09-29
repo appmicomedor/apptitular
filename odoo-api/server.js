@@ -291,6 +291,21 @@ app.post('/set_day', function (req, res) {
     });
 });
 
+app.post('/save_bank', function (req, res) {
+
+    odoo.connect(function (err) {
+        if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });
+
+        var inParams = [];
+        inParams.push([Number(req.body.id)]); //id to update
+        inParams.push({'acc_number': req.body.acc_number});
+        odoo.execute_kw('res.partner.bank', 'write', [inParams], function (err, value) {
+            if (err) { return res.send({ error: true, data: err, message: 'Error escritura en backend, contacte con soporte' }); }
+            return res.send({ error: false, data: value, message: 'success' });
+        });
+    });
+});
+
 // Add a new user  
 app.post('/get_fields', function (req, res) {
     odoo.connect(function (err) {

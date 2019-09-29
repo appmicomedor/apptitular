@@ -6,6 +6,7 @@ import { Router, NavigationExtras } from '@angular/router';
 import { UserService } from '../provider/user.service';
 import { CalendarPopupPage } from '../calendar-popup/calendar-popup.page'
 import { AsistenciaPopupPage } from '../asistencia-popup/asistencia-popup.page'
+import { CuentaPopupPage } from '../cuenta-popup/cuenta-popup.page'
 
 @Component({
   selector: 'app-info',
@@ -27,6 +28,8 @@ export class InfoPage implements OnInit {
     private modalCtrl: ModalController,
   ) {
     this.user = this.userService.getUser();
+
+    this.user['bank'].acc_number_fmt = this.user['bank'].acc_number.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim();;
 
     for (var i = 0; i < this.user['childs'].length; i++) {
       if (this.user['childs'][i].company_id){
@@ -116,5 +119,23 @@ export class InfoPage implements OnInit {
  
     return await modal.present();
   }
+
+  async editarCuenta(){
+    const modal = await this.modalCtrl.create({
+      component: CuentaPopupPage,
+      componentProps: {
+        "user": this.user,
+      }
+    });
+ 
+    modal.onDidDismiss().then((data) => {
+      if (data !== null) {
+        this.user = this.userService.getUser();
+      }
+    });
+ 
+    return await modal.present();
+  }
+
 
 }

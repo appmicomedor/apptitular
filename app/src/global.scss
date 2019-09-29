@@ -45,6 +45,14 @@ ion-back-button{
   padding-top: 5px;
 }  
 
+.edit-icon
+{
+  color: #00584c !important;
+  font-size: 28px;
+  font-weight: bold;
+  padding-top: 5px;
+}  
+
 .divided-line
 {
   width: 100%!important;
@@ -83,6 +91,12 @@ ion-calendar-week .week-title.transparent{
   --color:#ffffff;
   --background:#00584c;
   width: 250px!important;
+  text-align: center!important;
+}
+
+.icon-button {
+  --color:#ffffff;
+  --background:#00584c;
   text-align: center!important;
 }
 

@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'calendar-popup', loadChildren: './calendar-popup/calendar-popup.module#CalendarPopupPageModule' },
   { path: 'asistencia-popup', loadChildren: './asistencia-popup/asistencia-popup.module#AsistenciaPopupPageModule' },
   { path: 'historico', loadChildren: './historico/historico.module#HistoricoPageModule' },
-
+  { path: 'cuenta-popup', loadChildren: './cuenta-popup/cuenta-popup.module#CuentaPopupPageModule' },
   
 ];
 @NgModule({

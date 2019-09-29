@@ -9,6 +9,7 @@ import { InfoPage } from './info.page';
 
 import { CalendarPopupPageModule } from './../calendar-popup/calendar-popup.module';
 import { AsistenciaPopupPageModule } from './../asistencia-popup/asistencia-popup.module';
+import { CuentaPopupPageModule } from './../cuenta-popup/cuenta-popup.module';
 
 const routes: Routes = [
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
     IonicModule,
     CalendarPopupPageModule,
     AsistenciaPopupPageModule,
+    CuentaPopupPageModule,    
     RouterModule.forChild(routes)
   ],
   declarations: [InfoPage]
