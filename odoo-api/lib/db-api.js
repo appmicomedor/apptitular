@@ -64,9 +64,10 @@ class DbApi {
         let contador = 0;
         let dt = this.toMysqlFormat(new Date());
 
-        let mysql_date = null;
-        if (date)
+        let mysql_date = dt;
+        if (date) {
             mysql_date = this.toMysqlFormat(new Date(date));
+        }
 
         let sql = "\
                 INSERT INTO historial\
