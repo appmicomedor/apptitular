@@ -53,16 +53,35 @@ export class HistoricoPage implements OnInit {
         this.historico = response['data'];
 
         for (var i = 0; i < this.historico.length; i++) {
-          if (this.historico[i].value==1)
-            this.historico[i].status = 'Sí asiste';
-
-          else if (this.historico[i].value==3)
-            this.historico[i].status = 'No asiste';
-
-          // Convert UTC to GMT    
-          this.historico[i].dateFmt       = this.utilService.presentDate(this.historico[i].date);   
+          let json = JSON.parse(this.historico[i].value);
+          // Convert UTC to GMT                
           this.historico[i].createdAtFmt  = this.utilService.formatDateTime(this.historico[i].createdAt); 
 
+          if (this.historico[i].tipo==0){
+            if (json.value==1)
+              this.historico[i].status = 'Sí asiste';
+
+            else if (json.value==3)
+              this.historico[i].status = 'No asiste';
+
+            this.historico[i].dateFmt       = this.utilService.presentDate(this.historico[i].date);                 
+          }
+          else if (this.historico[i].tipo==1){
+            if (json.y_ise_factura_aut){
+              this.historico[i].status = 'Semana completa';
+            }
+            else if (json.y_ise_s){
+              this.historico[i].status = 'Esporádico';
+            }
+            else {
+              this.historico[i].status = 'Por días: ';  
+              if (json.y_ise_l) this.historico[i].status += 'Lunes ';
+              if (json.y_ise_m) this.historico[i].status += 'Martes ';
+              if (json.y_ise_x) this.historico[i].status += 'Miércoles ';
+              if (json.y_ise_j) this.historico[i].status += 'Jueves ';
+              if (json.y_ise_v) this.historico[i].status += 'Viernes ';
+            }
+          }
         }
       }
     });

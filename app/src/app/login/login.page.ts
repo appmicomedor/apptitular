@@ -17,6 +17,7 @@ export class LoginPage implements OnInit {
   password: string;
   userInfo : any;
   toast:any;
+  loading: any = null;
 
   constructor( private navCtrl: NavController,
     private httpService : AuthHttpService,
@@ -28,7 +29,7 @@ export class LoginPage implements OnInit {
     ) {
   }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.storage.get('user').then((data) => {
       if (data) {
         this.userService.setUser(data);
@@ -41,15 +42,18 @@ export class LoginPage implements OnInit {
 
   async presentLoading() {
   
-    const loadingElement = await this.loadingCtrl.create({
+    this.loading = await this.loadingCtrl.create({
       message: 'Cargando..',
       spinner: 'crescent'
     });
-    return await loadingElement.present();
+    return await this.loading.present();
   }
     
-  signIn() {
+  signInLoading(){
     this.presentLoading();
+    this.signIn();
+  }
+  signIn() {
 
     let param = {
       username: this.username,
@@ -57,13 +61,20 @@ export class LoginPage implements OnInit {
     }
     
     this.httpService.request('POST', 'login', param).subscribe(response => {
-      this.loadingCtrl.dismiss();      
+      if (this.loading)
+        this.loadingCtrl.dismiss();      
       if(response['error']){
         this.presentToast(response['message']);
       }else{
         console.log('data ' + JSON.stringify(response['data']));
         this.userService.saveUser(response['data']);
-        this.router.navigateByUrl('/info');
+
+        let navigationExtras: NavigationExtras = {
+          state: {
+            user: this.userService.getUser()
+          }
+        };
+        this.router.navigate(['info'], navigationExtras);
       }      
     });    
   }

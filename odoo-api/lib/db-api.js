@@ -60,17 +60,19 @@ class DbApi {
         this.dbConn.query(sql);
     }
 
-    setHistorial(userId, parentId, childId, date, value, titular){        
+    setHistorial(userId, parentId, childId, date, value, titular, tipo){        
         let contador = 0;
         let dt = this.toMysqlFormat(new Date());
 
-        let mysql_date = this.toMysqlFormat(new Date(date));
+        let mysql_date = null;
+        if (date)
+            mysql_date = this.toMysqlFormat(new Date(date));
 
         let sql = "\
                 INSERT INTO historial\
-                    (userId, parentId, childId, date, createdAt, value, titular)\
+                    (userId, parentId, childId, date, createdAt, value, titular, tipo)\
                 VALUES\
-                    (" + userId + "," + parentId + "," + childId + ",'" + mysql_date + "','" + dt + "'," + value + ",'" + titular + "');"
+                    (" + userId + "," + parentId + "," + childId + ",'" + mysql_date + "','" + dt + "','" + value + "','" + titular + "'," + tipo + ");"
 
         //console.log('sql ' + sql);
         this.dbConn.query(sql);

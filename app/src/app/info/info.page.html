@@ -23,10 +23,8 @@
     </div>
     <div style="font-size: 20px;font-weight: bold;padding-left: 20px;">Titular</div>
     <div style="padding-left: 20px;">
-      <p style="padding-left: 10px;"><strong>Nombre:</strong> {{user['name']}}</p>
-      <p style="padding-left: 10px;"><strong>Cta. Bancaria:</strong></p> 
-      <p style="padding-left: 10px;">{{user['bank'].acc_number_fmt}}
-        <ion-button size="medium" class="icon-button" (click)="editarCuenta()"><ion-icon name="create"></ion-icon></ion-button></p>
+      <p style="padding-left: 10px;"><strong>Nombre:</strong> {{user['name']}}</p>   
+      <p style="padding-left: 10px;line-height: 40px;"><strong>Cta. Bancaria:</strong> {{user['bank'].acc_number_fmt}} <ion-button [disabled]="true" size="medium" class="icon-button" style="margin-top:-12px;padding-left: 10px;" (click)="editarCuenta()"><ion-icon name="create"></ion-icon>Cambiar cuenta</ion-button></p> 
 
     </div>
     <div style="font-size: 20px;font-weight: bold;padding-left: 20px;">Comensales</div>
@@ -38,7 +36,8 @@
                 <ion-col size="7">
                   <ion-card-title>{{child.name}}</ion-card-title>
                   <ion-card-subtitle *ngIf="child.active_school_id && child.active_school_id.length>0">{{child.active_school_id[1]}}</ion-card-subtitle>
-                  <ion-card-subtitle *ngIf="child.company_id && child.company_id.length>0">{{child.company_id[1]}}</ion-card-subtitle>                      
+                  <ion-card-subtitle *ngIf="child.company_id && child.company_id.length>0">{{child.company_id[1]}}</ion-card-subtitle>
+                  <ion-card-subtitle>Estado: {{child['x_ise_estado']}}</ion-card-subtitle>                   
                 </ion-col>
                 <ion-col size="5" style="padding-top:0px;padding-right:0px;">
                   <img src="{{child.catering_logo}}" style="z-index:11;width: 150px;float: right;">
@@ -47,9 +46,9 @@
             </ion-card-header>
           
             <ion-card-content text-center>
-              <ion-button size="medium" class="child-button" (click)="openCalendar(child)"><ion-icon name="calendar"></ion-icon>&nbsp;Calendario comedor</ion-button>                  
-              <ion-button size="medium" class="child-button" (click)="openHistorico(child)"><ion-icon name="time"></ion-icon>&nbsp;Histórico de peticiones</ion-button>                  
-              <ion-button size="medium" class="child-button" (click)="openAsistencia(child)"><ion-icon name="settings"></ion-icon>&nbsp;Configuración de asistencia</ion-button>
+              <ion-button [disabled]="child['x_ise_estado']==='baja_ise'" size="medium" class="child-button" (click)="openCalendar(child)"><ion-icon name="calendar"></ion-icon>&nbsp;Calendario comedor</ion-button>                  
+              <ion-button [disabled]="child['x_ise_estado']==='baja_ise'" size="medium" class="child-button" (click)="openHistorico(child)"><ion-icon name="time"></ion-icon>&nbsp;Histórico de peticiones</ion-button>                  
+              <ion-button [disabled]="child['x_ise_estado']==='baja_ise'" size="medium" class="child-button" (click)="openAsistencia(child)"><ion-icon name="settings"></ion-icon>&nbsp;Configuración de asistencia</ion-button>
             </ion-card-content>
           </ion-card>
       </div>

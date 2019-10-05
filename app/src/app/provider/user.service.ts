@@ -13,12 +13,16 @@ export class UserService {
   }
 
   saveUser(data) {
-    this.user = data;
-    this.storage.set('user', this.user);
-    if (data)
+    if (data){
+      this.user = data;
+      this.storage.set('user', this.user);
       this.isAuth = true;
-    else 
+    }
+    else {
+      this.user = null;
+      this.storage.remove('user');
       this.isAuth = false;
+    }
   }
 
   setUser(user) {

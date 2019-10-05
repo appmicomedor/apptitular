@@ -18,6 +18,7 @@ export class InfoPage implements OnInit {
   user: any;
   app_version: string;
 
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -27,7 +28,20 @@ export class InfoPage implements OnInit {
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
   ) {
-    this.user = this.userService.getUser();
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.zone.run(() => {
+          this.user = this.router.getCurrentNavigation().extras.state.user;
+          this.prepareUser();
+        });
+      }
+      else{
+        this.user = this.userService.getUser();
+      }
+    });
+  }
+
+  prepareUser(){
 
     this.user['bank'].acc_number_fmt = this.user['bank'].acc_number.replace(/[^\dA-Z]/g, '').replace(/(.{4})/g, '$1 ').trim();;
 

@@ -125,7 +125,7 @@ app.post('/login', function (req, res) {
             if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });
 
             var inParams = [];
-            inParams.push([['x_ise_nie', '=', req.body.username], ['x_ise_estado', '=', 'titular']]);
+            inParams.push([['x_ise_nie', '=', req.body.username]]);
             odoo.execute_kw('res.partner', 'search', [inParams], function (err, value) {
                 if (err) return res.send({ error: true, message: 'Error de acceso' });
 
@@ -148,7 +148,7 @@ app.post('/login', function (req, res) {
                         }
                         var inParams = [];
                         inParams.push(value); //ids
-                        inParams.push(['acc_number']); //fields
+                        inParams.push(['acc_number', 'mandate_ids']); //fields
 
                         odoo.execute_kw('res.partner.bank', 'read', [inParams], function (err, value) {
                             if (err || !value || value.length == 0) {
@@ -179,7 +179,7 @@ app.post('/login', function (req, res) {
                                 if (err) { return res.send({ error: true, message: 'Error de acceso' }); }
                                 var inParams = [];
                                 inParams.push(value); //ids
-                                inParams.push(['name', 'active_school_id', 'company_id']); //fields
+                                inParams.push(['name', 'active_school_id', 'company_id', 'x_ise_estado']); //fields
 
                                 odoo.execute_kw('res.partner', 'read', [inParams], function (err, value) {
                                     if (err) { return res.send({ error: true, message: 'Error de acceso' }); }
@@ -276,8 +276,8 @@ app.post('/set_asistencia', function (req, res) {
         if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });
 
         var inParams = [];
-        inParams.push([Number(req.body.child_id)]); //id to update
-        inParams.push({
+        inParams.push([Number(req.body.childId)]); //id to update
+        let jsonData = {
             'y_ise_factura_aut': req.body.y_ise_factura_aut,
             'y_ise_s': req.body.y_ise_s,
             'y_ise_l': req.body.y_ise_l,
@@ -285,11 +285,14 @@ app.post('/set_asistencia', function (req, res) {
             'y_ise_x': req.body.y_ise_x,
             'y_ise_j': req.body.y_ise_j,
             'y_ise_v': req.body.y_ise_v,
-        });
+        };
+        inParams.push(jsonData);
 
-        
         odoo.execute_kw('res.partner', 'write', [inParams], function (err, value) {
             if (err) { return res.send({ error: true, data: err, message: 'Error escritura en backend, contacte con soporte' }); }
+
+            dbapi.setHistorial(req.body.userId, req.body.parentId, req.body.childId, null, JSON.stringify(jsonData), req.body.titular, 1);
+
             return res.send({ error: false, data: value, message: 'success' });
         });
     });
@@ -309,7 +312,10 @@ app.post('/set_day', function (req, res) {
 
         odoo.execute_kw('scat.student', 'write', [inParams], function (err, value) {
             if (err) { return res.send({ error: true, data: err, message: 'Error escritura en backend, contacte con soporte' }); }
-            dbapi.setHistorial(req.body.userId, req.body.parentId, req.body.childId, req.body.date, req.body.value, req.body.titular);
+            let jsonData = {
+                value: req.body.value
+            };
+            dbapi.setHistorial(req.body.userId, req.body.parentId, req.body.childId, req.body.date, JSON.stringify(jsonData), req.body.titular, 0);
             return res.send({ error: false, data: value, message: 'success' });
         });
 
@@ -322,9 +328,9 @@ app.post('/set_bank', function (req, res) {
         if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });
 
         var inParams = [];
-        inParams.push([Number(req.body.id)]); //id to update
+        //inParams.push([Number(req.body.id)]); //id to update
         inParams.push({'acc_number': req.body.acc_number});
-        odoo.execute_kw('res.partner.bank', 'write', [inParams], function (err, value) {
+        odoo.execute_kw('res.partner.bank', 'create', [inParams], function (err, value) {
             if (err) { return res.send({ error: true, data: err, message: 'Error escritura en backend, contacte con soporte' }); }
             return res.send({ error: false, data: value, message: 'success' });
         });

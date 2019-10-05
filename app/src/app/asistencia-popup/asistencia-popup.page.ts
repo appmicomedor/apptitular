@@ -57,10 +57,13 @@ export class AsistenciaPopupPage implements OnInit {
  
   accept() 
   {
-
+    let user = this.userService.getUser();
     // Guardamos nueva asistencia
     let param = {
-      child_id:  this.child.id,
+      userId: user.db_id,
+      parentId: user.id,     
+      titular: user.name, 
+      childId:  this.child.id,
       y_ise_factura_aut: this.semana,
       y_ise_s: this.esporadico,
       y_ise_l: this.pordias && this.dias[0].isChecked,
