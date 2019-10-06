@@ -85,11 +85,9 @@ export class InfoPage implements OnInit {
     });
  
     modal.onDidDismiss().then((data) => {
-      if (data !== null) {
+      if (data && data.data) {
         this.date = new Date(data.data);
         this.dateFmt = this.utilService.presentDate(this.date);
-
-        console.log(JSON.stringify(data));
       }
     });
  

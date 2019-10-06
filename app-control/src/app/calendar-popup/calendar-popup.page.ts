@@ -51,8 +51,7 @@ export class CalendarPopupPage implements OnInit {
   }
  
   async closeModal() {
-    const onClosedData: string = "Wrapped Up!";
-    await this.modalController.dismiss(onClosedData);
+    await this.modalController.dismiss();
   }
 
   async onChange($event) 
