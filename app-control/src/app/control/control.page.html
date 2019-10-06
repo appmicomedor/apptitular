@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Histórico de peticiones</ion-title>
+    <div class="child-name">{{child.name}}</div>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="control?.length == 0" style="text-align: center; padding: 100px 20px;">
+    <p style="font-size: 24px;">No hay peticiones de cambios para este comensal</p>
+  </div>
+  <div *ngIf="control?.length > 0" >
+    <ion-card *ngFor="let h of control">
+      <ion-card-header *ngIf="h.tipo==0">
+        <ion-card-title>Petición cambio de asistencia al comedor</ion-card-title>
+        <ion-card-subtitle>Fecha: <strong>{{h.dateFmt}}</strong></ion-card-subtitle>
+        <ion-card-subtitle>Nuevo estado: <span class="status">{{h.status}}</span></ion-card-subtitle>        
+      </ion-card-header>
+
+      <ion-card-header *ngIf="h.tipo==1">
+        <ion-card-title>Petición cambio de configuración</ion-card-title>
+        <ion-card-subtitle>Nueva configuración: <span class="status">{{h.status}}</span></ion-card-subtitle>        
+      </ion-card-header>
+
+      <div style="padding-left: 20px;">
+        <p style="padding-left: 10px;"><strong>Titular:</strong> {{h.titular}}</p>
+        <p style="padding-left: 10px;"><strong>Comensal:</strong> {{child.name}}</p>        
+        <p style="padding-left: 10px;"><strong>Fecha petición:</strong> {{h.createdAtFmt}}</p>
+      </div>
+
+      <ion-card-content>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div style="text-align: center;">
+    <ion-button size="medium" style="width: 50%;margin:auto;margin-top: 30px;--color:#00584c;--background:#ffffff;" (click)="goBack()" expand="block">Volver</ion-button>
+  </div>
+</ion-content>
