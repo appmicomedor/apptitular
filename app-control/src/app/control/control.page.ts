@@ -14,7 +14,10 @@ import { UtilService } from '../provider/util.service';
 })
 export class ControlPage implements OnInit {
 
-  child: any;
+  school: any;
+  date: Date;
+  dateFmt: string;
+
   control: any;
 
   constructor(
@@ -31,7 +34,10 @@ export class ControlPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.zone.run(() => {
-          this.child = this.router.getCurrentNavigation().extras.state.child;
+          this.school   = this.router.getCurrentNavigation().extras.state.school;
+          this.date     = this.router.getCurrentNavigation().extras.state.date;
+          this.dateFmt  = this.router.getCurrentNavigation().extras.state.dateFmt;
+
           this.getControl();
         });
       }
@@ -43,6 +49,7 @@ export class ControlPage implements OnInit {
   }
 
   getControl(){
+    /*
     let param = {
       childId: this.child.id,
     }
@@ -84,11 +91,10 @@ export class ControlPage implements OnInit {
           }
         }
       }
-    });
+    });*/
   }
 
   goBack(){
     this.location.back();
   }
-
 }

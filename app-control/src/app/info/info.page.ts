@@ -98,7 +98,8 @@ export class InfoPage implements OnInit {
     let navigationExtras: NavigationExtras = {
       state: {
         school: school,
-        date: this.date
+        date: this.date,
+        dateFmt: this.dateFmt
       }
     };
     this.router.navigate(['control'], navigationExtras);
