@@ -35,6 +35,10 @@ Para configurar el servidor nodejs, debe generar un fichero .env en el directori
 
 ## Despliegue App
 
+Existen 2 apps:
+* app: app usuarios de comedores
+* app-control: app control de presencia en comedores
+
 ### Progressive Web App (PWA)
 
 1. Ejecutar `npm run ionic:build --prod`
