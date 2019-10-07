@@ -23,8 +23,8 @@ export class CalendarPopupPage implements OnInit {
   data: any;
 
   optionsRange: CalendarComponentOptions = {
-      from: new Date(2018, 0, 1),
-      to: 0,
+      from: new Date(2019, 8, 1),
+      to: new Date(),
       pickMode: 'single',
       showMonthPicker: true,
       monthPickerFormat: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],

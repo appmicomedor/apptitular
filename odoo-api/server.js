@@ -454,8 +454,6 @@ app.post('/control-set-day', function (req, res) {
 		username: req.body.username,
 		password: req.body.password,
   });
-    
-  console.log('req.body ' + JSON.stringify(req.body));
 
 	control_odoo.connect(function (err) {
 		if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });

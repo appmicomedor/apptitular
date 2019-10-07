@@ -78,6 +78,10 @@ ion-calendar-week .week-title.transparent{
   padding: 0px 0px!important;
 }
 
+button[disabled] p{
+  color: #b3b3b3!important;
+}
+
 .child-name {
   font-size: 14px;
   color: #fff;
