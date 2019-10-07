@@ -15,6 +15,7 @@ export class CalendarPopupPage implements OnInit {
   loadingModal: any;
 
   date: Date;
+  type: 'string';  
   dateFmt: string;
   dateYMD: string;
 

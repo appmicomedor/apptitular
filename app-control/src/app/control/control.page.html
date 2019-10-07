@@ -17,7 +17,7 @@
     <p style="font-size: 24px;">No hay comensales</p>
   </div>
   <div *ngIf="control?.length > 0" >
-    <ion-row *ngFor="let student of control" [class]="student.class">
+    <ion-row *ngFor="let student of control; let i = index" [class]="student.class" (click)="changeControl(student, i)">
       <ion-col size="12">
         <div class="asistencia-nombre">{{student.nombre}}</div>               
       </ion-col>

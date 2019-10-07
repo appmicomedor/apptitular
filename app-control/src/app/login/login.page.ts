@@ -14,8 +14,8 @@ import { UserService } from '../provider/user.service';
 })
 export class LoginPage implements OnInit {
   action: IAuthAction;
-  username: string = 'topdigital@cateringvillablanca.es';
-  password: string = 'vOmC3PhHGtbc5hwS79YvOT01HYPxsAiv';
+  username: string = '';
+  password: string = '';
   userInfo : any;
   toast:any;
   loading: any = null;

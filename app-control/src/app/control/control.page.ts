@@ -1,6 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AlertController, ModalController } from '@ionic/angular';
+import { AlertController, ModalController, ToastController } from '@ionic/angular';
 import { AuthHttpService } from '../auth/auth-http.service';
 import { Router, NavigationExtras } from '@angular/router';
 import { Location } from '@angular/common';
@@ -13,6 +13,8 @@ import { UtilService } from '../provider/util.service';
   styleUrls: ['./control.page.scss'],
 })
 export class ControlPage implements OnInit {
+
+  toast:any;
 
   school: any;
   date: Date;
@@ -29,7 +31,8 @@ export class ControlPage implements OnInit {
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private location: Location,
-    private utilService: UtilService,    
+    private utilService: UtilService,   
+    public toastCtrl: ToastController,     
   ) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
@@ -65,21 +68,93 @@ export class ControlPage implements OnInit {
         this.control = response['data'];
         let dia = 'dia' + this.date.getDate();
         for (var i = 0; i < this.control.length; i++) {
-          var names = this.control[i]['student_id'][1].split(',');
+
           this.control[i].asistencia  = this.control[i][dia][1];
-          this.control[i].nombre      = names[2]+ ', ' + names[3];
-          this.control[i].id          = this.control[i]['student_id'][0];
+          this.control[i].nombre      = this.control[i]['student_name'];
+          this.control[i].id          = this.control[i]['id'];
 
           this.control[i].class = 'asistencia';
-          if (this.control[i].asistencia=='A' || this.control[i].asistencia=='J' || this.control[i].asistencia=='F')
+          if (this.control[i].asistencia=='A' || this.control[i].asistencia=='J' || this.control[i].asistencia=='F'){
             this.control[i].class += '-' + this.control[i].asistencia;
+            if (this.control[i].asistencia == 'A')
+              this.control[i].code = 1;
+            if (this.control[i].asistencia == 'J')
+              this.control[i].code = 3;
+            if (this.control[i].asistencia == 'F')
+              this.control[i].code = 2;
+          }
 
+          //console.log('control ' + JSON.stringify(this.control[i]));
         }
       }
     });
   }
 
+  changeControl(student, index){
+    if (student.asistencia=='A' || student.asistencia=='J' || student.asistencia=='F'){
+
+      let daym = this.date.getDate();
+      let dayi = 'dia' + String(daym);  
+      
+      if (student.code==1){
+        student.code = 2;
+        student.asistencia = 'F';
+      }
+        
+      else if (student.code==2 || student.code==3){
+        student.code = 1;
+        student.asistencia = 'A';
+      }
+        
+      let param = {
+        username: this.userService.getUser().username,
+        password: this.userService.getUser().password,
+        id: student.id,
+        dia: dayi,
+        value: student.code,       
+      }
+
+      this.httpService.request('POST', 'control-set-day', param).subscribe(response => {
+
+        if (!response['error']) {    
+          this.updateStudent(student, index);
+          this.presentToast('Cambio efectuado correctamente');
+        }
+        else {
+          this.presentToast('ERROR: el cambio no se ha guardado, consulte con soporte');
+        }
+      });
+
+    }
+  }
+
+  updateStudent(student, i){
+
+    this.control[i].asistencia = student.asistencia;
+    this.control[i].code = student.code;
+    this.control[i].class = 'asistencia';
+    if (this.control[i].asistencia=='A' || this.control[i].asistencia=='J' || this.control[i].asistencia=='F'){
+      this.control[i].class += '-' + this.control[i].asistencia + '  md hydrated';
+    }
+  }
+
   goBack(){
     this.location.back();
   }
+
+  presentToast(msg) {
+    this.toast = this.toastCtrl.create({
+      message: msg,
+      duration: 5000,
+      position: 'bottom'
+    }).then((toastData)=>{
+      toastData.present();
+    });
+  }
+
+  hideToast(){
+    this.toastCtrl.dismiss();
+    this.toast = null;
+  }  
+
 }
