@@ -17,8 +17,11 @@
     <p style="font-size: 24px;">No hay comensales</p>
   </div>
   <div *ngIf="control?.length > 0" >
-
-
+    <ion-row *ngFor="let student of control" [class]="student.class">
+      <ion-col size="12">
+        <div class="asistencia-nombre">{{student.nombre}}</div>               
+      </ion-col>
+    </ion-row>
   </div>
   <div style="text-align: center;">
     <ion-button size="medium" style="width: 50%;margin:auto;margin-top: 30px;--color:#00584c;--background:#ffffff;" (click)="goBack()" expand="block">Volver</ion-button>

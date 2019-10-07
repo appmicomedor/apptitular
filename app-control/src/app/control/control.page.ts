@@ -49,49 +49,34 @@ export class ControlPage implements OnInit {
   }
 
   getControl(){
-    /*
+    
     let param = {
-      childId: this.child.id,
+      username: this.userService.getUser().username,
+      password: this.userService.getUser().password,
+      school_id: this.school.id,
+      year: this.date.getFullYear(), 
+      month: this.date.getMonth() + 1,
+      day: this.date.getDate(),
     }
 
-    this.httpService.request('POST', 'get_control', param).subscribe(response => {
-      
+    this.httpService.request('POST', 'control-get-school', param).subscribe(response => {
+    
       if (!response['error']) {   
         this.control = response['data'];
-
+        let dia = 'dia' + this.date.getDate();
         for (var i = 0; i < this.control.length; i++) {
-          let json = JSON.parse(this.control[i].value);
-          // Convert UTC to GMT                
-          this.control[i].createdAtFmt  = this.utilService.formatDateTime(this.control[i].createdAt); 
+          var names = this.control[i]['student_id'][1].split(',');
+          this.control[i].asistencia  = this.control[i][dia][1];
+          this.control[i].nombre      = names[2]+ ', ' + names[3];
+          this.control[i].id          = this.control[i]['student_id'][0];
 
-          if (this.control[i].tipo==0){
-            if (json.value==1)
-              this.control[i].status = 'Sí asiste';
+          this.control[i].class = 'asistencia';
+          if (this.control[i].asistencia=='A' || this.control[i].asistencia=='J' || this.control[i].asistencia=='F')
+            this.control[i].class += '-' + this.control[i].asistencia;
 
-            else if (json.value==3)
-              this.control[i].status = 'No asiste';
-
-            this.control[i].dateFmt       = this.utilService.presentDate(this.control[i].date);                 
-          }
-          else if (this.control[i].tipo==1){
-            if (json.y_ise_factura_aut){
-              this.control[i].status = 'Semana completa';
-            }
-            else if (json.y_ise_s){
-              this.control[i].status = 'Esporádico';
-            }
-            else {
-              this.control[i].status = 'Por días: ';  
-              if (json.y_ise_l) this.control[i].status += 'Lunes ';
-              if (json.y_ise_m) this.control[i].status += 'Martes ';
-              if (json.y_ise_x) this.control[i].status += 'Miércoles ';
-              if (json.y_ise_j) this.control[i].status += 'Jueves ';
-              if (json.y_ise_v) this.control[i].status += 'Viernes ';
-            }
-          }
         }
       }
-    });*/
+    });
   }
 
   goBack(){

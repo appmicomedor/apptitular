@@ -54,9 +54,7 @@ export class LoginPage implements OnInit {
     this.presentLoading();
     this.signIn();
   }
-  callback(){
-    console.log('callback');
-  }
+
   signIn() {
 
     let param = {

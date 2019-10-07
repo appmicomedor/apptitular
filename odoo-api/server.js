@@ -395,10 +395,7 @@ app.post('/control-login', function (req, res) {
 		username: req.body.username,
 		password: req.body.password,
 	});
-  
-  console.log('db ' + process.env['ODOO_DB']);
-  console.log('username ' + req.body.username);
-  
+
 	control_odoo.connect(function (err) {
     if (err) return res.send({ error: true, data: err, message: 'Error usuario / contraseña no válidos' });
 
@@ -420,6 +417,33 @@ app.post('/control-login', function (req, res) {
         return res.send({ error: false, data: profesional, message: 'success' });
       });
     });
+	});
+});
+
+
+app.post('/control-get-school', function (req, res) {
+
+	let control_odoo = new Odoo({
+		url: process.env['ODOO_URL'],
+		port: process.env['ODOO_PORT'],
+    db: process.env['ODOO_DB'],   
+		username: req.body.username,
+		password: req.body.password,
+  });
+
+  var control = [];
+    
+	control_odoo.connect(function (err) {
+		if (err) return res.send({ error: true, data: err, message: 'Error conexión con backend' });
+
+		var inParams = [];
+    inParams.push([['school_id', '=', Number(req.body.school_id)], ['year', '=', req.body.year], ['month', '=', req.body.month]]);
+    inParams.push(['dia' + req.body.day, 'student_id']);
+
+		control_odoo.execute_kw('scat.student', 'search_read', [inParams], function (err, value) {
+      if (err || !value || value.length == 0) { return res.send({ error: true, message: 'No hay datos para la selección ' }); }
+      return res.send({ error: false, data: value, message: 'success' });
+		});
 	});
 });
 
