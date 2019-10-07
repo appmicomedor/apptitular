@@ -157,7 +157,7 @@ export class ControlPage implements OnInit {
   presentToast(msg) {
     this.toast = this.toastCtrl.create({
       message: msg,
-      duration: 5000,
+      duration: 2000,
       position: 'bottom'
     }).then((toastData)=>{
       toastData.present();
