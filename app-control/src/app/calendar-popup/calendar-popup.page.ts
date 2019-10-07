@@ -23,7 +23,7 @@ export class CalendarPopupPage implements OnInit {
   data: any;
 
   optionsRange: CalendarComponentOptions = {
-      from: new Date(2019, 8, 1),
+      from: new Date(2019, 3, 1),
       to: new Date(),
       pickMode: 'single',
       showMonthPicker: true,

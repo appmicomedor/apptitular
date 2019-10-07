@@ -66,7 +66,19 @@ export class ControlPage implements OnInit {
     
       if (!response['error']) {   
         this.control = response['data'];
+
+        // Sort by name
+        this.control.sort(function (a, b) {
+          let name_a = a['student_name'].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          let name_b = b['student_name'].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+          if(name_a < name_b) { return -1; }
+          if(name_a > name_b) { return 1; }
+          return 0;
+      });
+
         let dia = 'dia' + this.date.getDate();
+
+
         for (var i = 0; i < this.control.length; i++) {
 
           this.control[i].asistencia  = this.control[i][dia][1];
