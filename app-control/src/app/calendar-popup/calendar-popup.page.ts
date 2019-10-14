@@ -23,7 +23,7 @@ export class CalendarPopupPage implements OnInit {
   data: any;
 
   optionsRange: CalendarComponentOptions = {
-      from: new Date(2019, 3, 1),
+      from: new Date(),
       to: new Date(),
       pickMode: 'single',
       showMonthPicker: true,
@@ -44,6 +44,9 @@ export class CalendarPopupPage implements OnInit {
 
     this.daysConfig = [];   
      
+    var b = new Date();
+    b.setDate(b.getDate() - 80); // Hace 80 días
+    this.optionsRange.from = b;
   
   }
  
