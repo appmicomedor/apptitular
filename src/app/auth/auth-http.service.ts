@@ -3,6 +3,9 @@ import { Requestor,  } from '@openid/appauth';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+
+import { UserService } from '../provider/user.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -11,9 +14,15 @@ export class AuthHttpService {
   requestor: Requestor;
   //api_domain = 'https://apptitular.micomedor.net:3000/';
   api_domain = 'http://localhost:3000/';
-  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': ''      
+    })
+  };
   constructor(
-    public httpClient : HttpClient
+    public httpClient : HttpClient,
+    private userService: UserService, 
   ) {
 
   }
@@ -26,8 +35,17 @@ export class AuthHttpService {
           return response;
         })
       );
-    else if(method == 'POST')
-      return this.httpClient.post(url, postData);
+    else if(method == 'POST') {
+      let token = this.userService.getToken();
+      let headers = new HttpHeaders();
+      headers.set('Content-Type', 'application/json');
+      if (token) {
+        this.httpOptions.headers =
+          this.httpOptions.headers.set('Authorization', 'Bearer ' + token);
+      }
+
+      return this.httpClient.post(url, postData, this.httpOptions);
+    }      
   }
 
   public getHeader(){

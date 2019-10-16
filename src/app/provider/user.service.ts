@@ -40,4 +40,11 @@ export class UserService {
   getVersion(){
     return '1.0.3';
   }
+
+  getToken(){
+    if (this.user)
+      return this.user.token;
+     
+    return null;
+  }
 }

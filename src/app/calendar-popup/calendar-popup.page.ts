@@ -149,7 +149,6 @@ export class CalendarPopupPage implements OnInit {
   {
     if (this.toast)
       this.hideToast();
-    this.presentLoading();
 
      this.daysConfig = [];
 
@@ -230,13 +229,11 @@ export class CalendarPopupPage implements OnInit {
         };
 
         this.calcStatus();   
-        this.loadingCtrl.dismiss();              
       }
       else {
-        this.loadingCtrl.dismiss(); 
         this.presentToast('El calendario de asistencia para el mes seleccionado no está abierto.');
       }
-     
+         
     });   
   }
 
