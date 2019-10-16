@@ -14,7 +14,7 @@
 <ion-content>
   <div *ngIf="user == null" style="text-align: center;padding-top: 100px;">
     <p style="font-size: 30px;">No Información</p>
-    <p style="font-weight: normal;font-size:12px;text-align: center;">Versión: {{app_version}}</p>    
+    <p style="font-weight: normal;font-size:12px;text-align: center;">Versión: {{userService.getVersion()}</p>    
   </div>
   <div *ngIf="user != null">
     <div class="parent" style="padding-left: 20px;">
@@ -31,7 +31,7 @@
     <div class="child">
       <div *ngIf="user['childs'].length > 0">
           <ion-card *ngFor="let child of user['childs']">
-            <ion-card-header>
+            <ion-card-header *ngIf="child['x_ise_estado']!=false">
               <ion-row>
                 <ion-col size="7">
                   <ion-card-title>{{child.name}}</ion-card-title>
@@ -45,7 +45,7 @@
               </ion-row>
             </ion-card-header>
           
-            <ion-card-content text-center>
+            <ion-card-content  *ngIf="child['x_ise_estado']!=false" text-center>
               <ion-button [disabled]="child['x_ise_estado']==='baja_ise'" size="medium" class="child-button" (click)="openCalendar(child)"><ion-icon name="calendar"></ion-icon>&nbsp;Calendario comedor</ion-button>                  
               <ion-button [disabled]="child['x_ise_estado']==='baja_ise'" size="medium" class="child-button" (click)="openHistorico(child)"><ion-icon name="time"></ion-icon>&nbsp;Histórico de peticiones</ion-button>                  
               <ion-button [disabled]="child['x_ise_estado']==='baja_ise'" size="medium" class="child-button" (click)="openAsistencia(child)"><ion-icon name="settings"></ion-icon>&nbsp;Configuración de asistencia</ion-button>
