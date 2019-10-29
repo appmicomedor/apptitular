@@ -33,7 +33,7 @@ export class CuentaPopupPage implements OnInit {
     private httpService : AuthHttpService, 
     public toastCtrl: ToastController,    
     private alertCtrl: AlertController,  
-    private userService: UserService,      
+    public userService: UserService,      
   ) { 
      
   
@@ -79,6 +79,7 @@ export class CuentaPopupPage implements OnInit {
           this.userService.saveUser(this.user);
         }
         else {
+          console.error(JSON.stringify(response));             
           this.presentToast('No se ha podido modificar su cuenta bancaria, inténtelo más tarde o contacte con soporte');
         }
       });

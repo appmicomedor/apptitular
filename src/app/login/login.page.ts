@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
     private httpService : AuthHttpService,
     private router: Router,
     public storage: Storage,    
-    private userService : UserService,
+    public userService : UserService,
     private loadingCtrl: LoadingController,
     public toastCtrl: ToastController,      
     ) {
@@ -34,6 +34,8 @@ export class LoginPage implements OnInit {
       if (data) {
         this.userService.setUser(data);
         this.username = data['username'];
+        if (this.username)
+          this.username = this.username.toUpperCase();
         this.password = data['password'];
         this.signIn();        
       }
@@ -55,6 +57,8 @@ export class LoginPage implements OnInit {
   }
   signIn() {
 
+    this.username = this.username.toUpperCase();
+
     let param = {
       username: this.username,
       password: this.password
@@ -64,6 +68,7 @@ export class LoginPage implements OnInit {
       if (this.loading)
         this.loadingCtrl.dismiss();      
       if(response['error']){
+        console.error(JSON.stringify(response));        
         this.presentToast(response['message']);
       }else{
         console.log('data ' + JSON.stringify(response['data']));

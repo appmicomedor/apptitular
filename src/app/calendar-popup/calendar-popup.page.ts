@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { ModalController, LoadingController, ToastController, AlertController } from '@ionic/angular';
 import { CalendarComponentOptions, DayConfig } from "ion4-calendar";
 import { UtilService } from '../provider/util.service';
@@ -57,7 +57,8 @@ export class CalendarPopupPage implements OnInit {
     private httpService : AuthHttpService, 
     public toastCtrl: ToastController,    
     private alertCtrl: AlertController,  
-    private userService: UserService,      
+    public userService: UserService,     
+    private zone: NgZone,
   ) { 
     this.date = new Date();
     this.dateYMD = this.utilService.formatYMD(this.date);
@@ -94,39 +95,41 @@ export class CalendarPopupPage implements OnInit {
   }
 
   calcStatus(){
-    this.status = '';    
-    this.code = 0;
-    if (this.data==null)
-      return;
+    this.zone.run(() => { 
+      this.status = '';    
+      this.code = 0;
+      if (this.data==null)
+        return;
 
-    let daym = this.date.getDate();
-    let dayi = 'dia' + String(daym);
-    if (this.data[dayi].length == 2) {
-      let letter = this.data[dayi][1];
-      if (letter=='A'){
-        this.status = 'Sí asiste';
-        this.code = 1;
+      let daym = this.date.getDate();
+      let dayi = 'dia' + String(daym);
+      if (this.data[dayi].length == 2) {
+        let letter = this.data[dayi][1];
+        if (letter=='A'){
+          this.status = 'Sí asiste';
+          this.code = 1;
+        }
+        else if (letter=='J'){
+          this.status = 'No asiste';
+          this.code = 3;
+        }
       }
-      else if (letter=='J'){
-        this.status = 'No asiste';
-        this.code = 3;
-      }
-    }
 
-    //let now = new Date();
-    let h = this.server_time.getHours();
-    let extraday = 0;
-    if (h>=10)
-      extraday = 1;
+      //let now = new Date();
+      let h = this.server_time.getHours();
+      let extraday = 0;
+      if (h>=10)
+        extraday = 1;
 
-    let days_preaviso = this.preaviso + extraday;
+      let days_preaviso = this.preaviso + extraday;
 
-    let dif_days  = ((Date.UTC(this.date.getFullYear(), this.date.getMonth(), this.date.getDate()) - Date.UTC(this.server_time.getFullYear(), this.server_time.getMonth(), this.server_time.getDate()) ) /(1000 * 60 * 60 * 24));
-  
-    if (days_preaviso>dif_days)
-      this.can_modify = false;
-    else  
-      this.can_modify = true;
+      let dif_days  = ((Date.UTC(this.date.getFullYear(), this.date.getMonth(), this.date.getDate()) - Date.UTC(this.server_time.getFullYear(), this.server_time.getMonth(), this.server_time.getDate()) ) /(1000 * 60 * 60 * 24));
+    
+      if (days_preaviso>dif_days)
+        this.can_modify = false;
+      else  
+        this.can_modify = true;
+    });        
   }
 
   accept() 
@@ -180,7 +183,8 @@ export class CalendarPopupPage implements OnInit {
     }
 
     let param = {
-      student_id: this.child.id,
+      childId: this.child.id,
+      companyId: this.child.company_id[0],      
       year: year,
       month: month
     }
@@ -231,6 +235,7 @@ export class CalendarPopupPage implements OnInit {
         this.calcStatus();   
       }
       else {
+        console.error(JSON.stringify(response));
         this.presentToast('El calendario de asistencia para el mes seleccionado no está abierto.');
       }
          
@@ -315,6 +320,7 @@ export class CalendarPopupPage implements OnInit {
       userId: user.db_id,
       parentId: user.id,
       childId: this.child.id,
+      companyId: this.child.company_id[0],      
       date: this.date,
       titular: user.name,
     }
@@ -326,6 +332,7 @@ export class CalendarPopupPage implements OnInit {
         this.getDaysConfig(this.date.getFullYear(), this.date.getMonth() + 1); 
       }
       else {
+        console.error(JSON.stringify(response));        
         this.presentToast('No se ha podido modificar el calendario, inténtelo más tarde o contacte con soporte');
       }
     });

@@ -22,7 +22,7 @@ export class HistoricoPage implements OnInit {
     private router: Router,
     private httpService: AuthHttpService,
     private zone: NgZone,
-    private userService: UserService,
+    public userService: UserService,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
     private location: Location,

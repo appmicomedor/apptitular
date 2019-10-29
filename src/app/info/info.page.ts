@@ -24,7 +24,7 @@ export class InfoPage implements OnInit {
     private router: Router,
     private httpService: AuthHttpService,
     private zone: NgZone,
-    private userService: UserService,
+    public userService: UserService,
     private alertCtrl: AlertController,
     private modalCtrl: ModalController,
   ) {
@@ -62,7 +62,7 @@ export class InfoPage implements OnInit {
   }
 
   ngOnInit() {
-    this.app_version = '1.0.3';
+    this.app_version = '1.0.4';
   }
 
   async cerrarSesion(){

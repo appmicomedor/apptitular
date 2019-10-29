@@ -12,8 +12,8 @@ import { UserService } from '../provider/user.service';
 export class AuthHttpService {
 
   requestor: Requestor;
-  //api_domain = 'https://apptitular.micomedor.net:3000/';
-  api_domain = 'http://localhost:3000/';
+  api_domain = 'https://apptitular.micomedor.net:3000/';
+  //api_domain = 'http://localhost:3000/';
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ export class AuthHttpService {
   };
   constructor(
     public httpClient : HttpClient,
-    private userService: UserService, 
+    public userService: UserService, 
   ) {
 
   }

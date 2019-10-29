@@ -39,7 +39,7 @@ export class AsistenciaPopupPage implements OnInit {
     private httpService : AuthHttpService, 
     public toastCtrl: ToastController,    
     private alertCtrl: AlertController,  
-    private userService: UserService,      
+    public userService: UserService,      
   ) { 
      
   
@@ -64,6 +64,7 @@ export class AsistenciaPopupPage implements OnInit {
       parentId: user.id,     
       titular: user.name, 
       childId:  this.child.id,
+      companyId: this.child.company_id[0],
       y_ise_factura_aut: this.semana,
       y_ise_s: this.esporadico,
       y_ise_l: this.pordias && this.dias[0].isChecked,
@@ -79,7 +80,8 @@ export class AsistenciaPopupPage implements OnInit {
 
       }
       else {
-        this.presentToast('No se ha podido modificar su cuenta bancaria, inténtelo más tarde o contacte con soporte');
+        console.error(JSON.stringify(response));   
+        this.presentToast('No se ha podido modificar su asistencia, inténtelo más tarde o contacte con soporte');
       }
     });
 
@@ -98,7 +100,8 @@ export class AsistenciaPopupPage implements OnInit {
   getAsistencia(){
 
     let param = {
-      child_id:  this.child.id,
+      childId:  this.child.id,
+      companyId: this.child.company_id[0],      
     }
 
     let $this = this;

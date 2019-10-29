@@ -14,7 +14,7 @@
         <div class="infotext" padding>Introducir como usuario su DNI y como contraseña las 6 últimas cifras de su cuenta bancaria</div>
         <div padding>
           <ion-item>
-            <ion-input type="text" [(ngModel)]="username" placeholder="Usuario"></ion-input>
+            <ion-input type="text" [(ngModel)]="username" placeholder="Usuario" (ngModelChange)="username = $event.toLocaleUpperCase()"></ion-input>
           </ion-item>
   
           <ion-item>
