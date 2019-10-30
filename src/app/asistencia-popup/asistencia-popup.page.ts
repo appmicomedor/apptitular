@@ -65,6 +65,8 @@ export class AsistenciaPopupPage implements OnInit {
       titular: user.name, 
       childId:  this.child.id,
       companyId: this.child.company_id[0],
+      username: user.username,
+      password: user.password,      
       y_ise_factura_aut: this.semana,
       y_ise_s: this.esporadico,
       y_ise_l: this.pordias && this.dias[0].isChecked,
@@ -99,9 +101,13 @@ export class AsistenciaPopupPage implements OnInit {
 
   getAsistencia(){
 
+    let user = this.userService.getUser();
+        
     let param = {
       childId:  this.child.id,
-      companyId: this.child.company_id[0],      
+      companyId: this.child.company_id[0],
+      username: user.username,
+      password: user.password,         
     }
 
     let $this = this;
@@ -148,7 +154,9 @@ export class AsistenciaPopupPage implements OnInit {
     this.toast = this.toastCtrl.create({
       message: msg,
       duration: 5000,
-      position: 'bottom'
+      position: 'bottom',
+      color: 'danger',
+      cssClass:"toast-comedor"      
     }).then((toastData)=>{
       toastData.present();
     });

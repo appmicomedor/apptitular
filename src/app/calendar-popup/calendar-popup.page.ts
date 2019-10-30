@@ -182,11 +182,15 @@ export class CalendarPopupPage implements OnInit {
       this.daysConfig.push(dayConfig);
     }
 
+    let user = this.userService.getUser();
+        
     let param = {
       childId: this.child.id,
       companyId: this.child.company_id[0],      
       year: year,
-      month: month
+      month: month,
+      username: user.username,
+      password: user.password,         
     }
 
     let $this = this;
@@ -323,6 +327,8 @@ export class CalendarPopupPage implements OnInit {
       companyId: this.child.company_id[0],      
       date: this.date,
       titular: user.name,
+      username: user.username,
+      password: user.password,
     }
 
     this.data = null;
@@ -344,7 +350,9 @@ export class CalendarPopupPage implements OnInit {
     this.toast = this.toastCtrl.create({
       message: msg,
       duration: 5000,
-      position: 'bottom'
+      position: 'bottom',
+      color: 'danger',
+      cssClass:"toast-comedor"      
     }).then((toastData)=>{
       toastData.present();
     });

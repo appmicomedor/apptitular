@@ -13,8 +13,8 @@ import { UserService } from '../provider/user.service';
 })
 export class LoginPage implements OnInit {
   action: IAuthAction;
-  username: string;
-  password: string;
+  username: string = '';
+  password: string = '';
   userInfo : any;
   toast:any;
   loading: any = null;
@@ -64,13 +64,16 @@ export class LoginPage implements OnInit {
       password: this.password
     }
     
+    let $this = this;
     this.httpService.request('POST', 'login', param).subscribe(response => {
       if (this.loading)
         this.loadingCtrl.dismiss();      
-      if(response['error']){
-        console.error(JSON.stringify(response));        
+      if(response['error']) {
+        console.error(JSON.stringify(response)); 
+        $this.username = '';
+        $this.password = '';       
         this.presentToast(response['message']);
-      }else{
+      } else {
         console.log('data ' + JSON.stringify(response['data']));
         this.userService.saveUser(response['data']);
 
@@ -87,8 +90,12 @@ export class LoginPage implements OnInit {
   presentToast(msg) {
     this.toast = this.toastCtrl.create({
       message: msg,
-      duration: 5000,
-      position: 'bottom'
+      duration: 8000,
+      position: 'bottom',
+      color: 'danger',
+      cssClass:"toast-comedor",
+      showCloseButton: true,
+      closeButtonText: 'OK',
     }).then((toastData)=>{
       toastData.present();
     });

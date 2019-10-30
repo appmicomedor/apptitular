@@ -62,7 +62,7 @@ export class InfoPage implements OnInit {
   }
 
   ngOnInit() {
-    this.app_version = '1.0.4';
+    this.app_version = '1.0.5';
   }
 
   async cerrarSesion(){

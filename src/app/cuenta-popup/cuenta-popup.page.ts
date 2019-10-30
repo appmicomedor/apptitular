@@ -67,7 +67,9 @@ export class CuentaPopupPage implements OnInit {
         id:  this.user['bank'].id,
         acc_number: this.user['bank'].acc_number,
         mandate_ids: this.user['bank'].mandate_ids,
-        partner_id: this.user['bank'].partner_id,                
+        partner_id: this.user['bank'].partner_id,   
+        username: this.user.username,
+        password: this.user.password,                    
       }
   
       this.data = null;
@@ -106,7 +108,9 @@ export class CuentaPopupPage implements OnInit {
     this.toast = this.toastCtrl.create({
       message: msg,
       duration: 5000,
-      position: 'bottom'
+      position: 'bottom',
+      color: 'danger',
+      cssClass:"toast-comedor"         
     }).then((toastData)=>{
       toastData.present();
     });
